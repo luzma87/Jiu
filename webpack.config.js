@@ -14,11 +14,18 @@ var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 module.exports = {
   context: sourcePath,
   entry: {
-    app: './main.tsx'
+    main: './index.tsx',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux'
+    ]
   },
   output: {
     path: outPath,
-    filename: 'bundle.js',
+    filename: '[name].js',
     chunkFilename: '[chunkhash].js',
     publicPath: '/'
   },
@@ -108,7 +115,7 @@ module.exports = {
       disable: !isProduction
     }),
     new HtmlWebpackPlugin({
-      template: 'assets/index.html'
+      template: 'index.html'
     })
   ],
   devServer: {
