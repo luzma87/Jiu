@@ -60,7 +60,7 @@ function task_clear_port {
 function task_check_dep {
   check_for_tool "ncu" "npm install -g npm-check-updates"
   echo "${checks_fg}checking dependencies (do npm install to upgrade them)${normal_fg}"
-  ncu -u
+  ncu -a
 }
 
 function task_check_sec {
