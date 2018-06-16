@@ -1,16 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 
-export namespace App {
-  export interface Props {}
-  export interface State {}
-}
-
-export class App extends React.Component<App.Props, App.State> {
+export class App extends React.Component {
 
   render() {
     return (
-      <div>
-       Index
+      <div className="pepe">
+       Index nuevo
       </div>
     );
   }
