@@ -19,3 +19,7 @@ body {
 .container .full {
   width: 100%;
 }
+
+.leftIcon {
+  margin-right: 8px;
+}
