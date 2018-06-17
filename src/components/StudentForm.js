@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Student from './../models/Student';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button/Button';
 
 class StudentForm extends React.Component {
 
@@ -21,7 +22,11 @@ class StudentForm extends React.Component {
   render() {
     return (
       <div className="container">
-        <Typography variant="title" className="title" color="primary">
+        <Typography
+          variant="title"
+          className="title"
+          color="primary"
+        >
           Estudiante
         </Typography>
         <TextField
@@ -177,7 +182,11 @@ class StudentForm extends React.Component {
           className="full"
           onChange={this.handleChange}
         />
-        <Typography variant="title" className="title" color="primary">
+        <Typography
+          variant="title"
+          className="title"
+          color="primary"
+        >
           Academia
         </Typography>
         <TextField
@@ -251,7 +260,11 @@ class StudentForm extends React.Component {
           className="full"
           onChange={this.handleChange}
         />
-        <Typography variant="title" className="title" color="primary">
+        <Typography
+          variant="title"
+          className="title"
+          color="primary"
+        >
           Contacto
         </Typography>
         <TextField
@@ -300,6 +313,7 @@ class StudentForm extends React.Component {
           id="isActive"
           value="true"
         />
+        <Button variant="contained" color="primary">Guardar</Button>
       </div>
     );
   }
