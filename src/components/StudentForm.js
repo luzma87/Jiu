@@ -313,7 +313,10 @@ class StudentForm extends React.Component {
           id="isActive"
           value="true"
         />
-        <Button variant="contained" color="primary">Guardar</Button>
+        <Button
+          variant="contained"
+          color="primary"
+        >Guardar</Button>
       </div>
     );
   }
