@@ -5,21 +5,33 @@ body {
 .container {
   margin: auto;
   max-width: 1000px;
+  padding: 24px;
+  position: relative;
+  box-sizing: border-box;
+  height: calc(100vh - 64px);
+}
+
+.gridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 30px;
-  padding: 24px
 }
 
-.container .title {
+.gridContainer .title {
   grid-column: 1 / span 3;
   margin-top: 15px;
 }
 
-.container .full {
+.gridContainer .full {
   width: 100%;
 }
 
 .leftIcon {
   margin-right: 8px;
+}
+
+.fixedBottom {
+  position: absolute !important;
+  bottom: 16px;
+  right: 16px;
 }

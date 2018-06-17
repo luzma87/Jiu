@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import App from './components/App';
 import StudentForm from './components/StudentForm';
+import StudentList from './components/StudentList';
 
 import theme from './util/appTheme';
 
@@ -23,6 +24,10 @@ ReactDOM.render(
       <Route
         path="/studentForm"
         component={StudentForm}
+      />
+      <Route
+        path="/students"
+        component={StudentList}
       />
     </MuiThemeProvider>
   </Router>,

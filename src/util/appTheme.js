@@ -11,13 +11,6 @@ const theme = createMuiTheme({
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
-  overrides: {
-    MuiButton: {
-      root: {
-        height: 48,
-      },
-    },
-  },
 });
 
 export default theme;

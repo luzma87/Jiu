@@ -27,7 +27,7 @@ function TopBar(props) {
           </Button>
           <Button
             component={Link}
-            to="/studentForm"
+            to="/students"
             color="inherit"
           >
             <Group className="leftIcon" />

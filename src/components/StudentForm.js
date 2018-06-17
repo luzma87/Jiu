@@ -21,7 +21,7 @@ class StudentForm extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container gridContainer">
         <Typography
           variant="title"
           className="title"
