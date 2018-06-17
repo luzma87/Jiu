@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
+import Select from './fields/Select';
 import Student from './../models/Student';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -14,8 +15,9 @@ class StudentForm extends React.Component {
   }
 
   handleChange(event) {
+    let fieldId = event.target.id || event.target.name
     let student = this.state.student;
-    student.setField(event.target.id, event.target.value);
+    student.setField(fieldId, event.target.value);
     this.setState({ student });
   }
 
@@ -71,25 +73,19 @@ class StudentForm extends React.Component {
           className="full"
           onChange={this.handleChange}
         />
-        <TextField
-          id="gender"
+        <Select
           label="Género"
+          id="gender"
           value={this.state.student.getValue('gender')}
-          error={this.state.student.hasError('gender')}
-          helperText={this.state.student.getError('gender')}
-          margin="normal"
-          className="full"
           onChange={this.handleChange}
+          options = {{ "M": "Masculino", "F": "Femenino" }}
         />
-        <TextField
-          id="maritalStatusId"
+        <Select
           label="Estado civíl"
+          id="maritalStatusId"
           value={this.state.student.getValue('maritalStatusId')}
-          error={this.state.student.hasError('maritalStatusId')}
-          helperText={this.state.student.getError('maritalStatusId')}
-          margin="normal"
-          className="full"
           onChange={this.handleChange}
+          options = {{ "S": "Soltero", "C": "Casado", "O": "Otro" }}
         />
         <TextField
           id="height"

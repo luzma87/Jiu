@@ -3,7 +3,13 @@ import studentFields from './StudentFields'
 export default class Student {
 
   constructor() {
-    this.fields = studentFields
+    this.fields = studentFields;
+    this.setDefaultValues()
+  }
+
+  setDefaultValues() {
+    this.setField("gender", "M");
+    this.setField("maritalStatusId", "S");
   }
 
   setField(name, value) {
