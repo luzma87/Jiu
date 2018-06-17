@@ -13,20 +13,18 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 
 ReactDOM.render(
   <Router>
-    <div>
-      <MuiThemeProvider theme={theme}>
-        <TopBar />
-        <Route
-          exact
-          path="/"
-          component={App}
-        />
-        <Route
-          path="/studentForm"
-          component={StudentForm}
-        />
-      </MuiThemeProvider>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <TopBar />
+      <Route
+        exact
+        path="/"
+        component={App}
+      />
+      <Route
+        path="/studentForm"
+        component={StudentForm}
+      />
+    </MuiThemeProvider>
   </Router>,
   document.getElementById('root'),
 );
