@@ -5,6 +5,7 @@ import TopBar from './components/TopBar';
 import App from './components/App';
 import StudentForm from './components/StudentForm';
 import StudentList from './components/StudentList';
+import MyProvider from './context/MyProvider';
 
 import theme from './util/appTheme';
 
@@ -14,22 +15,24 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 
 ReactDOM.render(
   <Router>
-    <MuiThemeProvider theme={theme}>
-      <TopBar />
-      <Route
-        exact
-        path="/"
-        component={App}
-      />
-      <Route
-        path="/studentForm"
-        component={StudentForm}
-      />
-      <Route
-        path="/students"
-        component={StudentList}
-      />
-    </MuiThemeProvider>
+    <MyProvider>
+      <MuiThemeProvider theme={theme}>
+        <TopBar />
+        <Route
+          exact
+          path="/"
+          component={App}
+        />
+        <Route
+          path="/studentForm"
+          component={StudentForm}
+        />
+        <Route
+          path="/students"
+          component={StudentList}
+        />
+      </MuiThemeProvider>
+    </MyProvider>
   </Router>,
   document.getElementById('root'),
 );

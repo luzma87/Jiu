@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Group from '@material-ui/icons/Group';
+import MyContext from '../context/MyContext';
 
 function TopBar(props) {
   return (
@@ -33,6 +34,26 @@ function TopBar(props) {
             <Group className="leftIcon" />
             Estudiantes
           </Button>
+
+          <MyContext.Consumer>
+            {(context) => (
+              <React.Fragment>
+                <Typography
+                  variant="title"
+                  color="inherit"
+                >
+                  {context.state.name} [{context.state.age}]
+                </Typography>
+                <Button
+                  onClick={() => context.growAYearOlder()}
+                  color="inherit"
+                >
+                  🎂
+                </Button>
+              </React.Fragment>
+            )}
+          </MyContext.Consumer>
+
         </Toolbar>
       </AppBar>
     </div>

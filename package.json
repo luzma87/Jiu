@@ -1,8 +1,8 @@
 {
-  "name": "typescript-react-redux-boilerplate",
+  "name": "Jiu",
   "version": "1.0.0",
   "private": true,
-  "description": "A frontend boilerplate with React, Redux and Typescript",
+  "description": "Jiu Jitsu front end",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,7 +23,7 @@
     "html-loader": "^1.0.0-alpha.0",
     "html-webpack-plugin": "^3.2.0",
     "nsp": "^3.2.1",
-    "postcss": "^6.0.22",
+    "postcss": "^6.0.23",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.1.0",
@@ -32,27 +32,21 @@
     "postcss-url": "^7.3.2",
     "prettier": "^1.13.5",
     "react-hot-loader": "^4.3.3",
-    "redux-devtools-extension": "^2.13.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
-    "webpack": "^4.12.0",
+    "webpack": "^4.12.1",
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "@material-ui/core": "^1.2.1",
+    "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
     "classnames": "^2.2.6",
+    "npm-check-updates": "^2.14.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "react-router-redux": "^5.0.0-alpha.9",
-    "redux": "^4.0.0",
-    "redux-actions": "^2.4.0",
-    "redux-thunk": "^2.3.0",
-    "redux-thunk-actions": "^1.2.1"
+    "react-router-dom": "^4.3.1"
   }
 }

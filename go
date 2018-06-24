@@ -50,6 +50,14 @@ function task_start {
   npm start
 }
 
+function task_clean {
+  echo "${start_fg}Cleaning app${normal_fg}"
+  echo -e "${start_fg}\tDeleting node modules${normal_fg}"
+  rm -rf node_modules
+  echo -e "${start_fg}\tReinstalling node modules${normal_fg}"
+  npm install
+}
+
 function task_clear_port {
   local port=$(lsof -ti :3030)
   echo "${misc_fg}Finding and killing process running in port 3030 [${port}]${normal_fg}"
@@ -76,6 +84,7 @@ function task_help {
   help_message+=" | ${checks_fg}check_dep${normal_fg}"
   help_message+=" | ${checks_fg}check_sec${normal_fg}"
 
+  help_message+=" | ${start_fg}clean${normal_fg}"
   help_message+=" | ${start_fg}start${normal_fg}"
   echo "${help_message}"
 }
@@ -90,6 +99,7 @@ function execute_task {
     check_dep) task_check_dep ;;
     check_sec) task_check_sec ;;
 
+    clean) task_clean ;;
     start) task_start ;;
     *) task_help ;;
   esac
