@@ -48,15 +48,6 @@ export default {
       }
     }
   },
-  l: {
-    value: "",
-    error: "",
-    validation: (field) => {
-      if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
-      }
-    }
-  },
   maritalStatusId: {
     value: "",
     error: "",
@@ -172,6 +163,9 @@ export default {
       if(field.value === "") {
         field.error = "Es necesario ingresar el ";
       }
+    }, 
+    transform: (field) => {
+      return {id: field.value}
     }
   },
   methodOfPaymentId: {

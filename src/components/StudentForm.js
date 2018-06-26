@@ -12,12 +12,27 @@ class StudentForm extends React.Component {
     super(props);
     this.state = { student: new Student() };
     this.handleChange = this.handleChange.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
   handleChange(event) {
     let fieldId = event.target.id || event.target.name
+    this.withState( student => {
+      student.setField(fieldId, event.target.value);
+    });
+  }
+
+  onSaveButtonClick() {
+    this.withState(student => {
+      if(student.isValid()) {
+        student.toJson()
+      }
+    });
+  }
+
+  withState(operation) {
     let student = this.state.student;
-    student.setField(fieldId, event.target.value);
+    operation(student);
     this.setState({ student });
   }
 
@@ -310,6 +325,7 @@ class StudentForm extends React.Component {
           value="true"
         />
         <Button
+          onClick={this.onSaveButtonClick}
           variant="contained"
           color="primary"
         >Guardar</Button>

@@ -30,4 +30,23 @@ export default class Student {
   hasError(name) {
     return this.fields[name].error !== ""
   }
+
+  isValid() {
+    var isValid = true;
+    Object.keys(this.fields).map((key) => {
+      let field = this.fields[key];
+      field.validation(field);
+      isValid = !this.hasError(key);     
+    });
+    return isValid;
+  }
+
+  toJson() {
+    let json = {};
+    Object.keys(this.fields).map((key) => {
+      let field = this.fields[key];
+      json[key] = field.transform != null ? field.transform(field) : field.value 
+    });
+    return json;
+  }
 }
