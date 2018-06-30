@@ -14,8 +14,8 @@ export default ({label, id, value, onChange, options}) => {
         inputProps={{ name: id, id: id}}
       >
         {
-          Object.keys(options).map((key) => {
-            return <MenuItem key={key} value={key}>{options[key]}</MenuItem>
+          options.map((object) => {
+            return <MenuItem key={object.id} value={object.id}>{object.description}</MenuItem>
           })
         }
       </Select>

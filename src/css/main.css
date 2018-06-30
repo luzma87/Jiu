@@ -3,12 +3,11 @@ body {
 }
 
 .container {
-  margin: auto;
+  margin: auto auto 30px;
   max-width: 1000px;
   padding: 24px;
   position: relative;
   box-sizing: border-box;
-  height: calc(100vh - 64px);
 }
 
 .gridContainer {
@@ -34,4 +33,18 @@ body {
   position: absolute !important;
   bottom: 16px;
   right: 16px;
+}
+
+.modal {
+  position: absolute;
+  width: 200px;
+  background-color: white;
+  padding: 30px;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-message {
+  margin-top: 10px !important;
 }

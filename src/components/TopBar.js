@@ -42,14 +42,8 @@ function TopBar(props) {
                   variant="title"
                   color="inherit"
                 >
-                  {context.state.name} [{context.state.age}]
+                  pepe
                 </Typography>
-                <Button
-                  onClick={() => context.growAYearOlder()}
-                  color="inherit"
-                >
-                  🎂
-                </Button>
               </React.Fragment>
             )}
           </MyContext.Consumer>

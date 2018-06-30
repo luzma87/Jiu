@@ -143,7 +143,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el tamaño de Gi ";
       }
     }
   },
@@ -163,9 +163,6 @@ export default {
       if(field.value === "") {
         field.error = "Es necesario ingresar el ";
       }
-    }, 
-    transform: (field) => {
-      return {id: field.value}
     }
   },
   methodOfPaymentId: {

@@ -2,30 +2,34 @@ import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Select from './fields/Select';
 import Student from './../models/Student';
-import { withTheme } from '@material-ui/core/styles';
+import {withTheme} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button/Button';
+import {withContext} from './../context/WithContext'
 
 class StudentForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { student: new Student() };
+    this.state = {student: new Student()};
     this.handleChange = this.handleChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
   handleChange(event) {
-    let fieldId = event.target.id || event.target.name
-    this.withState( student => {
+    let fieldId = event.target.id || event.target.name;
+    this.withState(student => {
       student.setField(fieldId, event.target.value);
     });
   }
 
   onSaveButtonClick() {
     this.withState(student => {
-      if(student.isValid()) {
-        student.toJson()
+      if (student.isValid()) {
+        this.props.context.toggleModal(true);
+        student.save(response => {
+           console.log("result", response);
+        });
       }
     });
   }
@@ -33,10 +37,12 @@ class StudentForm extends React.Component {
   withState(operation) {
     let student = this.state.student;
     operation(student);
-    this.setState({ student });
+    this.setState({student});
   }
 
   render() {
+    const {context} = this.props;
+    const {student} = this.state;
     return (
       <div className="container gridContainer">
         <Typography
@@ -50,9 +56,9 @@ class StudentForm extends React.Component {
           id="documentId"
           name="documentId"
           label="Cédula"
-          value={this.state.student.getValue('documentId')}
-          error={this.state.student.hasError('documentId')}
-          helperText={this.state.student.getError('documentId')}
+          value={student.getValue('documentId')}
+          error={student.hasError('documentId')}
+          helperText={student.getError('documentId')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -61,9 +67,9 @@ class StudentForm extends React.Component {
           id="name"
           name="name"
           label="Nombre"
-          value={this.state.student.getValue('name')}
-          error={this.state.student.hasError('name')}
-          helperText={this.state.student.getError('name')}
+          value={student.getValue('name')}
+          error={student.hasError('name')}
+          helperText={student.getError('name')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -71,9 +77,9 @@ class StudentForm extends React.Component {
         <TextField
           id="lastName"
           label="Apellido"
-          value={this.state.student.getValue('lastName')}
-          error={this.state.student.hasError('lastName')}
-          helperText={this.state.student.getError('lastName')}
+          value={student.getValue('lastName')}
+          error={student.hasError('lastName')}
+          helperText={student.getError('lastName')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -81,9 +87,9 @@ class StudentForm extends React.Component {
         <TextField
           id="dateOfBirth"
           label="Fecha de nacimiento"
-          value={this.state.student.getValue('dateOfBirth')}
-          error={this.state.student.hasError('dateOfBirth')}
-          helperText={this.state.student.getError('dateOfBirth')}
+          value={student.getValue('dateOfBirth')}
+          error={student.hasError('dateOfBirth')}
+          helperText={student.getError('dateOfBirth')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -91,23 +97,23 @@ class StudentForm extends React.Component {
         <Select
           label="Género"
           id="gender"
-          value={this.state.student.getValue('gender')}
+          value={student.getValue('gender')}
           onChange={this.handleChange}
-          options = {{ "M": "Masculino", "F": "Femenino" }}
+          options={context.gender}
         />
         <Select
           label="Estado civíl"
           id="maritalStatusId"
-          value={this.state.student.getValue('maritalStatusId')}
+          value={student.getValue('maritalStatusId')}
           onChange={this.handleChange}
-          options = {{ "S": "Soltero", "C": "Casado", "O": "Otro" }}
+          options={context.maritalStatus}
         />
         <TextField
           id="height"
           label="Estatura"
-          value={this.state.student.getValue('height')}
-          error={this.state.student.hasError('height')}
-          helperText={this.state.student.getError('height')}
+          value={student.getValue('height')}
+          error={student.hasError('height')}
+          helperText={student.getError('height')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -115,9 +121,9 @@ class StudentForm extends React.Component {
         <TextField
           id="weight"
           label="Peso"
-          value={this.state.student.getValue('weight')}
-          error={this.state.student.hasError('weight')}
-          helperText={this.state.student.getError('weight')}
+          value={student.getValue('weight')}
+          error={student.hasError('weight')}
+          helperText={student.getError('weight')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -125,9 +131,9 @@ class StudentForm extends React.Component {
         <TextField
           id="medicalConditions"
           label="Condiciones médicas"
-          value={this.state.student.getValue('medicalConditions')}
-          error={this.state.student.hasError('medicalConditions')}
-          helperText={this.state.student.getError('medicalConditions')}
+          value={student.getValue('medicalConditions')}
+          error={student.hasError('medicalConditions')}
+          helperText={student.getError('medicalConditions')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -135,9 +141,9 @@ class StudentForm extends React.Component {
         <TextField
           id="address"
           label="Dirección"
-          value={this.state.student.getValue('address')}
-          error={this.state.student.hasError('address')}
-          helperText={this.state.student.getError('address')}
+          value={student.getValue('address')}
+          error={student.hasError('address')}
+          helperText={student.getError('address')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -145,9 +151,9 @@ class StudentForm extends React.Component {
         <TextField
           id="countryOfBirth"
           label="País de nacimiento"
-          value={this.state.student.getValue('countryOfBirth')}
-          error={this.state.student.hasError('countryOfBirth')}
-          helperText={this.state.student.getError('countryOfBirth')}
+          value={student.getValue('countryOfBirth')}
+          error={student.hasError('countryOfBirth')}
+          helperText={student.getError('countryOfBirth')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -155,9 +161,9 @@ class StudentForm extends React.Component {
         <TextField
           id="cityOfBirth"
           label="Ciudad de nacimiento"
-          value={this.state.student.getValue('cityOfBirth')}
-          error={this.state.student.hasError('cityOfBirth')}
-          helperText={this.state.student.getError('cityOfBirth')}
+          value={student.getValue('cityOfBirth')}
+          error={student.hasError('cityOfBirth')}
+          helperText={student.getError('cityOfBirth')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -165,9 +171,9 @@ class StudentForm extends React.Component {
         <TextField
           id="email"
           label="Email"
-          value={this.state.student.getValue('email')}
-          error={this.state.student.hasError('email')}
-          helperText={this.state.student.getError('email')}
+          value={student.getValue('email')}
+          error={student.hasError('email')}
+          helperText={student.getError('email')}
           type="email"
           margin="normal"
           className="full"
@@ -176,9 +182,9 @@ class StudentForm extends React.Component {
         <TextField
           id="phone"
           label="Teléfono fijo"
-          value={this.state.student.getValue('phone')}
-          error={this.state.student.hasError('phone')}
-          helperText={this.state.student.getError('phone')}
+          value={student.getValue('phone')}
+          error={student.hasError('phone')}
+          helperText={student.getError('phone')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -186,9 +192,9 @@ class StudentForm extends React.Component {
         <TextField
           id="mobilePhone"
           label="Celular"
-          value={this.state.student.getValue('mobilePhone')}
-          error={this.state.student.hasError('mobilePhone')}
-          helperText={this.state.student.getError('mobilePhone')}
+          value={student.getValue('mobilePhone')}
+          error={student.hasError('mobilePhone')}
+          helperText={student.getError('mobilePhone')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -203,9 +209,9 @@ class StudentForm extends React.Component {
         <TextField
           id="giSize"
           label="Tamaño de GI"
-          value={this.state.student.getValue('giSize')}
-          error={this.state.student.hasError('giSize')}
-          helperText={this.state.student.getError('giSize')}
+          value={student.getValue('giSize')}
+          error={student.hasError('giSize')}
+          helperText={student.getError('giSize')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -213,50 +219,41 @@ class StudentForm extends React.Component {
         <TextField
           id="foundOut"
           label="Como nos encontró?"
-          value={this.state.student.getValue('foundOut')}
-          error={this.state.student.hasError('foundOut')}
-          helperText={this.state.student.getError('foundOut')}
+          value={student.getValue('foundOut')}
+          error={student.hasError('foundOut')}
+          helperText={student.getError('foundOut')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
         />
-        <div></div>
-        <TextField
-          id="planId"
+        <div/>
+        <Select
           label="Plan"
-          value={this.state.student.getValue('planId')}
-          error={this.state.student.hasError('planId')}
-          helperText={this.state.student.getError('planId')}
-          margin="normal"
-          className="full"
+          id="planId"
+          value={student.getValue('planId')}
           onChange={this.handleChange}
+          options={context.plans}
         />
-        <TextField
-          id="methodOfPaymentId"
+        <Select
           label="Forma de pago"
-          value={this.state.student.getValue('methodOfPaymentId')}
-          error={this.state.student.hasError('methodOfPaymentId')}
-          helperText={this.state.student.getError('methodOfPaymentId')}
-          margin="normal"
-          className="full"
+          id="methodOfPaymentId"
+          value={student.getValue('methodOfPaymentId')}
           onChange={this.handleChange}
+          options={context.paymentMethods}
         />
-        <TextField
-          id="rankId"
+        <Select
           label="Rango"
-          value={this.state.student.getValue('rankId')}
-          error={this.state.student.hasError('rankId')}
-          helperText={this.state.student.getError('rankId')}
-          margin="normal"
-          className="full"
+          id="rankId"
+          value={student.getValue('rankId')}
           onChange={this.handleChange}
+          options={context.ranks}
         />
         <TextField
           id="registrationDate"
           label="Fecha de registro"
-          value={this.state.student.getValue('registrationDate')}
-          error={this.state.student.hasError('registrationDate')}
-          helperText={this.state.student.getError('registrationDate')}
+          value={student.getValue('registrationDate')}
+          error={student.hasError('registrationDate')}
+          helperText={student.getError('registrationDate')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -264,9 +261,9 @@ class StudentForm extends React.Component {
         <TextField
           id="enrollmentDate"
           label="Fecha de enrolamiento"
-          value={this.state.student.getValue('enrollmentDate')}
-          error={this.state.student.hasError('enrollmentDate')}
-          helperText={this.state.student.getError('enrollmentDate')}
+          value={student.getValue('enrollmentDate')}
+          error={student.hasError('enrollmentDate')}
+          helperText={student.getError('enrollmentDate')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -281,9 +278,9 @@ class StudentForm extends React.Component {
         <TextField
           id="emergencyContactName"
           label="Contacto de emergencia"
-          value={this.state.student.getValue('emergencyContactName')}
-          error={this.state.student.hasError('emergencyContactName')}
-          helperText={this.state.student.getError('emergencyContactName')}
+          value={student.getValue('emergencyContactName')}
+          error={student.hasError('emergencyContactName')}
+          helperText={student.getError('emergencyContactName')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -291,20 +288,20 @@ class StudentForm extends React.Component {
         <TextField
           id="emergencyContactPhone"
           label="Teléfono"
-          value={this.state.student.getValue('emergencyContactPhone')}
-          error={this.state.student.hasError('emergencyContactPhone')}
-          helperText={this.state.student.getError('emergencyContactPhone')}
+          value={student.getValue('emergencyContactPhone')}
+          error={student.hasError('emergencyContactPhone')}
+          helperText={student.getError('emergencyContactPhone')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
         />
-        <div></div>
+        <div/>
         <TextField
           id="legalGuardianName"
           label="Representante"
-          value={this.state.student.getValue('legalGuardianName')}
-          error={this.state.student.hasError('legalGuardianName')}
-          helperText={this.state.student.getError('legalGuardianName')}
+          value={student.getValue('legalGuardianName')}
+          error={student.hasError('legalGuardianName')}
+          helperText={student.getError('legalGuardianName')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -312,17 +309,12 @@ class StudentForm extends React.Component {
         <TextField
           id="legalGuardianPhone"
           label="Teléfono"
-          value={this.state.student.getValue('legalGuardianPhone')}
-          error={this.state.student.hasError('legalGuardianPhone')}
-          helperText={this.state.student.getError('legalGuardianPhone')}
+          value={student.getValue('legalGuardianPhone')}
+          error={student.hasError('legalGuardianPhone')}
+          helperText={student.getError('legalGuardianPhone')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
-        />
-        <input
-          type="hidden"
-          id="isActive"
-          value="true"
         />
         <Button
           onClick={this.onSaveButtonClick}
@@ -334,4 +326,4 @@ class StudentForm extends React.Component {
   }
 }
 
-export default withTheme()(StudentForm);
+export default withContext(withTheme()(StudentForm));
