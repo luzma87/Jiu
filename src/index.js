@@ -10,6 +10,7 @@ import {
   faToggleOn,
   faToggleOff,
   faCoins,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import TopBar from './components/TopBar';
 import App from './components/App';
@@ -22,7 +23,7 @@ require('./css/main.css');
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-library.add(faUsers, faFilter, faTrash, faToggleOn, faToggleOff, faPencilAlt, faCoins);
+library.add(faUsers, faFilter, faTrash, faToggleOn, faToggleOff, faPencilAlt, faCoins, faUserPlus);
 
 ReactDOM.render(
   <Router>

@@ -25,9 +25,7 @@ class TableHeader extends React.Component {
     return (
       <TableHead>
         <TableRow>
-          <CustomTableCell
-            style={{ padding: 0 }}
-          >
+          <CustomTableCell style={{ padding: 0 }}>
             <Checkbox
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={numSelected === rowCount}
@@ -48,7 +46,7 @@ class TableHeader extends React.Component {
                   active={orderBy === column.id}
                   direction={order}
                   onClick={() => this.props.onRequestSort(column.id)}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ width: column.width, minWidth: column.minWidth}}
                 >
                   {column.label}
                 </TableSortLabel>

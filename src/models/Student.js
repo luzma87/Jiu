@@ -37,6 +37,7 @@ export default class Student {
     this.setField("gender", "M");
     this.setField("maritalStatusId", 2);
     this.setField("registrationDate", moment().format(constants.dateFormat));
+    this.setField("isActive", true);
   }
 
   setField(name, value) {

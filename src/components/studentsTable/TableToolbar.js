@@ -9,6 +9,7 @@ import studentClient from '../../rest/StudentClient';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -70,14 +71,24 @@ class TableToolbar extends React.Component {
 
   noneSelectedActions() {
     return (
-      <Tooltip title="Filtrar lista">
-        <IconButton
-          aria-label="Filtrar lista"
-          onClick={this.props.onFilterClick}
-        >
-          <FontAwesomeIcon icon="filter" />
-        </IconButton>
-      </Tooltip>
+      <Fragment>
+        <Tooltip title="Filtrar lista">
+          <IconButton
+            aria-label="Filtrar lista"
+            onClick={this.props.onFilterClick}
+          >
+            <FontAwesomeIcon icon="filter" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Agregar estudiante">
+          <IconButton
+            component={Link}
+            to="/studentForm"
+          >
+            <FontAwesomeIcon icon="user-plus" />
+          </IconButton>
+        </Tooltip>
+      </Fragment>
     );
   }
 
@@ -94,7 +105,7 @@ class TableToolbar extends React.Component {
         </Tooltip>
         <Tooltip title="Registrar Pago">
           <IconButton
-            aria-label="Registrar PAgo"
+            aria-label="Registrar Pago"
             onClick={this.props.onPaymentClick}
           >
             <FontAwesomeIcon icon="coins" />
@@ -160,6 +171,7 @@ TableToolbar.propTypes = {
   onFilterClick: PropTypes.func.isRequired,
   onDeactivateClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  onAddClick: PropTypes.func.isRequired,
   onPaymentClick: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
