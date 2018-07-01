@@ -13,12 +13,9 @@ class StudentList extends React.Component {
   }
 
   render() {
-
     return (
       <div className="container">
-
         <StudentsTable />
-
         <Button
           component={Link}
           to="/studentForm"
