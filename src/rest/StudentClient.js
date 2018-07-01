@@ -1,9 +1,18 @@
 import axios from 'axios';
+import constants from '../util/constants';
 
-const bffUrl = 'http://192.168.100.4:3000/api/';
+const bffUrl = constants.bffUrl;
+
+let getAllStudents = () => {
+    return axios.get(bffUrl + 'students?filter={"include":["rank","methodOfPayment"]}')
+    .catch(function(error) {
+      console.log(error);
+    });
+};
 
 export default {
-  save: ( userData ) => {
-    return axios.post(bffUrl + 'Students', userData, {timeout: 2000});
-  }
-}
+  save: (userData) => {
+    return axios.post(bffUrl + 'Students', userData, { timeout: 2000 });
+  },
+  getAllStudents,
+};

@@ -1,6 +1,7 @@
 import studentFields from './StudentFields';
 import studentClient from './../rest/StudentClient';
 import moment from 'moment';
+import constants from '../util/constants';
 
 export default class Student {
 
@@ -35,7 +36,7 @@ export default class Student {
 
     this.setField("gender", "M");
     this.setField("maritalStatusId", 2);
-    this.setField("registrationDate", moment().format('DD-MM-YYYY'));
+    this.setField("registrationDate", moment().format(constants.dateFormat));
   }
 
   setField(name, value) {
