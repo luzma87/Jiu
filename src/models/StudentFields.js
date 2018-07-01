@@ -35,7 +35,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar la fecha de nacimiento ";
       }
     }
   },
@@ -44,7 +44,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el género ";
       }
     }
   },
@@ -53,7 +53,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el estado civíl";
       }
     }
   },
@@ -62,7 +62,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar la estatura ";
       }
     }
   },
@@ -71,7 +71,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el peso";
       }
     }
   },
@@ -80,7 +80,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar las condiciones médicas ";
       }
     }
   },
@@ -89,7 +89,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar la dirección";
       }
     }
   },
@@ -98,7 +98,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el paìs de nacimiento";
       }
     }
   },
@@ -107,7 +107,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar la ciudad de nacimiento";
       }
     }
   },
@@ -116,7 +116,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el email";
       }
     }
   },
@@ -125,7 +125,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el teléfono";
       }
     }
   },
@@ -134,7 +134,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el teléfono mobil";
       }
     }
   },
@@ -150,18 +150,14 @@ export default {
   foundOut: {
     value: "",
     error: "",
-    validation: (field) => {
-      if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
-      }
-    }
+    validation: (field) => {}
   },
   planId: {
     value: "",
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el plan";
       }
     }
   },
@@ -170,7 +166,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar la forma de pago";
       }
     }
   },
@@ -179,7 +175,7 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el rango";
       }
     }
   },
@@ -188,25 +184,21 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar la fecha de registro";
       }
     }
   },
   enrollmentDate: {
     value: "",
     error: "",
-    validation: (field) => {
-      if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
-      }
-    }
+    validation: (field) => {}
   },
   emergencyContactName: {
     value: "",
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el contacto de emergencia";
       }
     }
   },
@@ -215,26 +207,18 @@ export default {
     error: "",
     validation: (field) => {
       if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
+        field.error = "Es necesario ingresar el teléfono";
       }
     }
   },
   legalGuardianName: {
     value: "",
     error: "",
-    validation: (field) => {
-      if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
-      }
-    }
+    validation: (field) => {}
   },
   legalGuardianPhone: {
     value: "",
     error: "",
-    validation: (field) => {
-      if(field.value === "") {
-        field.error = "Es necesario ingresar el ";
-      }
-    }
+    validation: (field) => {}
   }
 }

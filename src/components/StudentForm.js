@@ -189,6 +189,7 @@ class StudentForm extends React.Component {
           value={student.getValue('phone')}
           error={student.hasError('phone')}
           helperText={student.getError('phone')}
+          inputProps={{type: "number", maxLength: 12}}
           margin="normal"
           className="full"
           onChange={this.handleChange}

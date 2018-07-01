@@ -1,5 +1,6 @@
 import studentFields from './StudentFields';
 import studentClient from './../rest/StudentClient';
+import moment from 'moment';
 
 export default class Student {
 
@@ -27,14 +28,14 @@ export default class Student {
     this.setField("planId", 1);
     this.setField("methodOfPaymentId", 1);
     this.setField("rankId", 1);
-    this.setField("registrationDate", "01-12-2018");
-    this.setField("enrollmentDate", "01-12-2018");
     this.setField("emergencyContactName", "test");
     this.setField("emergencyContactPhone", "1232222");
     this.setField("legalGuardianName", "name");
     this.setField("legalGuardianPhone", "1232222");
+
     this.setField("gender", "M");
     this.setField("maritalStatusId", 2);
+    this.setField("registrationDate", moment().format('DD-MM-YYYY'));
   }
 
   setField(name, value) {
@@ -70,7 +71,8 @@ export default class Student {
     let json = {};
     Object.keys(this.fields).map((key) => {
       let field = this.fields[key];
-      json[key] = field.transform != null ? field.transform(field) : field.value
+      let value = field.value === "" ? null : field.value
+      json[key] = field.transform != null ? field.transform(field) : value
     });
     return json;
   }
