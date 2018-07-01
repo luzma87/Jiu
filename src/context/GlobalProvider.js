@@ -43,7 +43,7 @@ class GlobalProvider extends React.Component {
   loadParameters() {
     let component = this;
     parametersClient.getAll()
-      .then(axios.spread((maritalStatus, paymentMethods, ranks, plans) => {
+      .then(axios.spread((maritalStatus, plans, paymentMethods, ranks) => {
         component.setState({
           maritalStatus: maritalStatus.data,
           paymentMethods: paymentMethods.data,

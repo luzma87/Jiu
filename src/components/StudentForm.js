@@ -68,12 +68,12 @@ class StudentForm extends React.Component {
           onChange={this.handleChange}
         />
         <TextField
-          id="name"
-          name="name"
+          id="firstName"
+          name="firstName"
           label="Nombre"
-          value={student.getValue('name')}
-          error={student.hasError('name')}
-          helperText={student.getError('name')}
+          value={student.getValue('firstName')}
+          error={student.hasError('firstName')}
+          helperText={student.getError('firstName')}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -189,7 +189,7 @@ class StudentForm extends React.Component {
           value={student.getValue('phone')}
           error={student.hasError('phone')}
           helperText={student.getError('phone')}
-          inputProps={{type: "number", maxLength: 12}}
+          inputProps={{type: "number"}}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -199,6 +199,7 @@ class StudentForm extends React.Component {
           label="Celular"
           value={student.getValue('mobilePhone')}
           error={student.hasError('mobilePhone')}
+          inputProps={{type: "number"}}
           helperText={student.getError('mobilePhone')}
           margin="normal"
           className="full"
@@ -296,6 +297,7 @@ class StudentForm extends React.Component {
           value={student.getValue('emergencyContactPhone')}
           error={student.hasError('emergencyContactPhone')}
           helperText={student.getError('emergencyContactPhone')}
+          inputProps={{type: "number"}}
           margin="normal"
           className="full"
           onChange={this.handleChange}
@@ -317,6 +319,7 @@ class StudentForm extends React.Component {
           value={student.getValue('legalGuardianPhone')}
           error={student.hasError('legalGuardianPhone')}
           helperText={student.getError('legalGuardianPhone')}
+          inputProps={{type: "number"}}
           margin="normal"
           className="full"
           onChange={this.handleChange}

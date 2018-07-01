@@ -11,7 +11,7 @@ export default class Student {
   }
 
   setDefaultValues() {
-    this.setField("name", "pepe");
+    this.setField("firstName", "pepe");
     this.setField("lastName", "rodriguez");
     this.setField("documentId", "1718058827");
     this.setField("dateOfBirth", "01-12-2018");

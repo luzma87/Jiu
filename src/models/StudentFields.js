@@ -12,7 +12,7 @@ export default {
       }
     }
   },
-  name: {
+  firstName: {
     value: "",
     error: "",
     validation: (field) => {
