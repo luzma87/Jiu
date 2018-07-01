@@ -9,8 +9,7 @@ import Button from '@material-ui/core/Button';
 import Group from '@material-ui/icons/Group';
 import MyContext from '../context/MyContext';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function TopBar(props) {
   return (
@@ -34,35 +33,12 @@ function TopBar(props) {
             to="/students"
             color="inherit"
           >
-            <Group className="leftIcon" />
+            <FontAwesomeIcon
+              icon="users"
+              className="leftIcon"
+            />
             Estudiantes
           </Button>
-
-          <MyContext.Consumer>
-            {(context) => (
-              <React.Fragment>
-                <Typography
-                  variant="title"
-                  color="inherit"
-                >
-                  pepe
-                </Typography>
-
-                <Button
-                  onClick={() => context.growAYearOlder()}
-                  color="inherit"
-                >
-                  🎂
-                  <FontAwesomeIcon icon="check-square" />
-                  <FontAwesomeIcon icon="coffee" />
-                  <FontAwesomeIcon icon={['fab', 'apple']} />
-                  <FontAwesomeIcon icon={['fab', 'microsoft']} />
-                </Button>
-                
-              </React.Fragment>
-            )}
-          </MyContext.Consumer>
-
         </Toolbar>
       </AppBar>
     </div>
