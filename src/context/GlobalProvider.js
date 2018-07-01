@@ -2,8 +2,10 @@ import * as React from 'react';
 import MyContext from './MyContext';
 import parametersClient from './../rest/ParametersClient';
 import Modal from './../components/Modal';
+import axios from 'axios';
+import {withRouter} from 'react-router-dom';
 
-export default class GlobalProvider extends React.Component {
+class GlobalProvider extends React.Component {
 
   constructor(props) {
     super();
@@ -16,50 +18,47 @@ export default class GlobalProvider extends React.Component {
       modal: {
         show: false,
         isLoader: true,
-        message: "Mensaje",
-        title: "Default"
+        message: "",
+        title: ""
       },
-      toggleModal: this.updateModalState.bind(this)
+      toggleModal: this.updateModalState.bind(this),
+      redirectTo: this.redirectTo.bind(this)
     };
     this.loadParameters();
   }
 
-  updateModalState(isLoader, message, title) {
+  redirectTo(path) {
+    this.props.history.push(path)
+  }
+
+  updateModalState(show, isLoader, title, message) {
     let modal = this.state.modal;
-    modal.show = !modal.show;
-    modal.isLoader = isLoader;
-    modal.message = message;
-    modal.title = title;
+    modal.show = show;
+    modal.isLoader = isLoader !== undefined ? isLoader : true;
+    modal.message = message || "";
+    modal.title = title || "";
     this.setState({ modal })
   }
 
   loadParameters() {
     let component = this;
-    parametersClient.getMaritalStatus().then(function (response) {
-      component.setState({
-        maritalStatus: response.data
+    parametersClient.getAll()
+      .then(axios.spread((maritalStatus, paymentMethods, ranks, plans) => {
+        component.setState({
+          maritalStatus: maritalStatus.data,
+          paymentMethods: paymentMethods.data,
+          plans: plans.data,
+          ranks: ranks.data
+        });
+      }))
+      .catch((error) => {
+        this.updateModalState(true, false, "Error", "No se pudo conectar con el servidor: "+error);
       });
-    });
-    parametersClient.getPaymentMethods().then(function (response) {
-      component.setState({
-        paymentMethods: response.data
-      });
-    });
-    parametersClient.getPlans().then(function (response) {
-      component.setState({
-        plans: response.data
-      });
-    });
-    parametersClient.getRanks().then(function (response) {
-      component.setState({
-        ranks: response.data
-      });
-    });
   }
 
   showModal() {
     let modal =  this.state.modal;
-    return modal.show ? <Modal title={modal.title} message={modal.message} isLoader={modal.isLoader} onClose={ () => this.updateModalState(false) }/> : '';
+    return modal.show ? <Modal title={modal.title} message={modal.message} isLoader={modal.isLoader} onClick={ () => this.updateModalState(false) }/> : '';
   }
 
   render() {
@@ -75,3 +74,5 @@ export default class GlobalProvider extends React.Component {
     );
   }
 }
+
+export default withRouter(GlobalProvider);

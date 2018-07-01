@@ -45,6 +45,18 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.modal-message {
-  margin-top: 10px !important;
+.large .modal {
+  width: 400px;
+}
+
+.modal .title {
+}
+
+.modal .body {
+  margin-top: 10px;
+}
+
+.modal .buttons {
+  margin-top: 10px;
+  text-align: right;
 }

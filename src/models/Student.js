@@ -75,7 +75,9 @@ export default class Student {
     return json;
   }
 
-  save(callback) {
-     studentClient.save(this.toJson()).then(response => callback(response));
+  save(success, failure) {
+     studentClient.save(this.toJson())
+       .then(response => success(response))
+       .catch(error => failure(error));
   }
 }

@@ -5,7 +5,7 @@ import Student from './../models/Student';
 import {withTheme} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button/Button';
-import {withContext} from './../context/WithContext'
+import {withContext} from './../context/WithContext';
 
 class StudentForm extends React.Component {
 
@@ -27,8 +27,11 @@ class StudentForm extends React.Component {
     this.withState(student => {
       if (student.isValid()) {
         this.props.context.toggleModal(true);
-        student.save(response => {
-           console.log("result", response);
+        student.save(() => {
+          this.props.context.toggleModal(false);
+          this.props.context.redirectTo("/students");
+        }, error => {
+          this.props.context.toggleModal(true, false, "Error resgistrando al estudiante", error + "");
         });
       }
     });
@@ -61,6 +64,7 @@ class StudentForm extends React.Component {
           helperText={student.getError('documentId')}
           margin="normal"
           className="full"
+          inputProps={{maxLength: 10}}
           onChange={this.handleChange}
         />
         <TextField

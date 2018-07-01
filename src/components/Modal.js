@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button/Button';
 import gif from './../assets/loader.svg'
 
 class SimpleModal extends React.Component {
@@ -17,12 +18,21 @@ class SimpleModal extends React.Component {
   showText() {
     return(
       <Fragment>
-        <Typography variant="title" id="modal-title" color="primary">
-          {this.props.title}
-        </Typography>
-        <Typography variant="subheading" id="simple-modal-description" className="modal-message">
-          {this.props.message}
-        </Typography>
+        <div className="title">
+          <Typography variant="title" id="modal-title" color="primary">
+            {this.props.title}
+          </Typography>
+        </div>
+        <div className="body">
+          <Typography variant="subheading" id="simple-modal-description" className="modal-message">
+            {this.props.message}
+          </Typography>
+        </div>
+        <div className="buttons">
+          <Button onClick={this.props.onClick} variant="outlined" >
+            Cerrar
+          </Button>
+        </div>
       </Fragment>
     )
   }
@@ -31,6 +41,7 @@ class SimpleModal extends React.Component {
     return (
       <div>
         <Modal
+          className={!this.props.isLoader ? 'large' : ''}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={true}
