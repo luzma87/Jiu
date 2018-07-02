@@ -179,11 +179,11 @@ class StudentsTable extends React.Component {
                   <CustomTableCell>
                     {student.isActive ?
                      <FontAwesomeIcon
-                       icon="toggle-on"
+                       icon={['far', 'toggle-on']}
                        style={{ color: theme.palette.primary.main }}
                      /> :
                      <FontAwesomeIcon
-                       icon="toggle-off"
+                       icon={['far', 'toggle-off']}
                        style={{ color: theme.palette.secondary.main }}
                      />}
                   </CustomTableCell>

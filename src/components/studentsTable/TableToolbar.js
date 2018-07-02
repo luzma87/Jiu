@@ -77,7 +77,7 @@ class TableToolbar extends React.Component {
             aria-label="Filtrar lista"
             onClick={this.props.onFilterClick}
           >
-            <FontAwesomeIcon icon="filter" />
+            <FontAwesomeIcon icon={['far', 'filter']} />
           </IconButton>
         </Tooltip>
         <Tooltip title="Agregar estudiante">
@@ -85,7 +85,7 @@ class TableToolbar extends React.Component {
             component={Link}
             to="/studentForm"
           >
-            <FontAwesomeIcon icon="user-plus" />
+            <FontAwesomeIcon icon={['far', 'user-plus']} />
           </IconButton>
         </Tooltip>
       </Fragment>
@@ -100,7 +100,7 @@ class TableToolbar extends React.Component {
             aria-label="Editar"
             onClick={this.props.onEditClick}
           >
-            <FontAwesomeIcon icon="pencil-alt" />
+            <FontAwesomeIcon icon={['far', 'pencil-alt']} />
           </IconButton>
         </Tooltip>
         <Tooltip title="Registrar Pago">
@@ -108,7 +108,7 @@ class TableToolbar extends React.Component {
             aria-label="Registrar Pago"
             onClick={this.props.onPaymentClick}
           >
-            <FontAwesomeIcon icon="coins" />
+            <FontAwesomeIcon icon={['far', 'coins']} />
           </IconButton>
         </Tooltip>
         {this.manySelectedActions()}
@@ -124,7 +124,7 @@ class TableToolbar extends React.Component {
           onClick={this.props.onDeactivateClick}
         >
           <IconButton aria-label="Desactivar">
-            <FontAwesomeIcon icon="toggle-off" />
+            <FontAwesomeIcon icon={['far', 'toggle-off']} />
           </IconButton>
         </Tooltip>
       </Fragment>

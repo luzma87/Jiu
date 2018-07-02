@@ -32,7 +32,7 @@ function TopBar(props) {
             color="inherit"
           >
             <FontAwesomeIcon
-              icon="users"
+              icon={['fas', 'users']}
               className="leftIcon"
             />
             Estudiantes

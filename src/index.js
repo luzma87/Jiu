@@ -4,14 +4,21 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faUsers,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretLeft,
+  faCaretRight,
   faFilter,
-  faTrash,
+  faUserPlus,
+  faCoins,
   faPencilAlt,
   faToggleOn,
   faToggleOff,
-  faCoins,
-  faUserPlus,
-} from '@fortawesome/free-solid-svg-icons';
+  faSave,
+  faCalendarAlt,
+} from '@fortawesome/pro-regular-svg-icons';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 import TopBar from './components/TopBar';
 import App from './components/App';
 import StudentForm from './components/StudentForm';
@@ -23,27 +30,41 @@ require('./css/main.css');
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-library.add(faUsers, faFilter, faTrash, faToggleOn, faToggleOff, faPencilAlt, faCoins, faUserPlus);
+library.add(
+  faUsers,
+  faFilter,
+  faToggleOn,
+  faToggleOff,
+  faPencilAlt,
+  faCoins,
+  faUserPlus,
+  faCaretLeft,
+  faCaretRight,
+  faSave,
+  faCalendarAlt,
+);
 
 ReactDOM.render(
   <Router>
     <MuiThemeProvider theme={theme}>
-      <GlobalProvider>
-        <TopBar />
-        <Route
-          exact
-          path="/"
-          component={App}
-        />
-        <Route
-          path="/studentForm"
-          component={StudentForm}
-        />
-        <Route
-          path="/students"
-          component={StudentList}
-        />
-      </GlobalProvider>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <GlobalProvider>
+          <TopBar />
+          <Route
+            exact
+            path="/"
+            component={App}
+          />
+          <Route
+            path="/studentForm"
+            component={StudentForm}
+          />
+          <Route
+            path="/students"
+            component={StudentList}
+          />
+        </GlobalProvider>
+      </MuiPickersUtilsProvider>
     </MuiThemeProvider>
   </Router>,
   document.getElementById('root'),
