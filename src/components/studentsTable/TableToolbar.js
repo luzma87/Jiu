@@ -110,6 +110,11 @@ class TableToolbar extends React.Component {
   manySelectedActions() {
     return (
       <Fragment>
+        <Tooltip title="Activar">
+          <IconButton onClick={this.props.onActivateClick}>
+            <FontAwesomeIcon icon={['far', 'toggle-on']} />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="Desactivar">
           <IconButton onClick={this.props.onDeactivateClick}>
             <FontAwesomeIcon icon={['far', 'toggle-off']} />
@@ -158,6 +163,7 @@ TableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onFilterClick: PropTypes.func.isRequired,
   onDeactivateClick: PropTypes.func.isRequired,
+  onActivateClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onAddClick: PropTypes.func.isRequired,
   onPaymentClick: PropTypes.func.isRequired,

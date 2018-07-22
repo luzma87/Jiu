@@ -123,7 +123,16 @@ class StudentsTable extends React.Component {
         <TableToolbar
           numSelected={selected.length}
           onFilterClick={() => {}}
-          onDeactivateClick={() => {}}
+          onDeactivateClick={() => {
+            studentClient.deactivate(selected).then(() => {
+              location.reload();
+            });
+          }}
+          onActivateClick={() => {
+            studentClient.activate(selected).then(() => {
+              location.reload();
+            });
+          }}
           onEditClick={() => {
             if (selected.length === 1) {
               location.href = `/studentForm/${selected[0]}`;
