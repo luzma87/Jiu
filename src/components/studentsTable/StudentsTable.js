@@ -136,7 +136,11 @@ class StudentsTable extends React.Component {
           numSelected={selected.length}
           onFilterClick={() => {}}
           onDeactivateClick={() => {}}
-          onEditClick={() => {}}
+          onEditClick={() => {
+            if (selected.length === 1) {
+              location.href = `/studentForm/${selected[0]}`;
+            }
+          }}
           onAddClick={() => {}}
           onPaymentClick={() => {}}
         />
