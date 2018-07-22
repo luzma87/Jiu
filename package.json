@@ -5,7 +5,7 @@
   "description": "Jiu Jitsu front end",
   "main": "index.js",
   "engines": {
-    "node": ">=10"
+    "node": "10.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
