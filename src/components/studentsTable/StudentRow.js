@@ -20,7 +20,6 @@ class StudentRow extends React.Component {
         hover
         role="checkbox"
         key={student.id}
-        aria-checked={isSelected}
         tabIndex={-1}
         selected={isSelected}
         onClick={() => handleClick(student.id)}

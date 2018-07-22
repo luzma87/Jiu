@@ -164,12 +164,6 @@ class StudentsTable extends React.Component {
           count={students.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          backIconButtonProps={{
-            'aria-label': 'Página anterior',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Página siguiente',
-          }}
           onChangePage={(event, page) => this.handleChangePage(event, page)}
           onChangeRowsPerPage={(event) => this.handleChangeRowsPerPage(event)}
         />

@@ -73,10 +73,7 @@ class TableToolbar extends React.Component {
     return (
       <Fragment>
         <Tooltip title="Filtrar lista">
-          <IconButton
-            aria-label="Filtrar lista"
-            onClick={this.props.onFilterClick}
-          >
+          <IconButton onClick={this.props.onFilterClick}>
             <FontAwesomeIcon icon={['far', 'filter']} />
           </IconButton>
         </Tooltip>
@@ -96,18 +93,12 @@ class TableToolbar extends React.Component {
     return (
       <Fragment>
         <Tooltip title="Editar">
-          <IconButton
-            aria-label="Editar"
-            onClick={this.props.onEditClick}
-          >
+          <IconButton onClick={this.props.onEditClick}>
             <FontAwesomeIcon icon={['far', 'pencil-alt']} />
           </IconButton>
         </Tooltip>
         <Tooltip title="Registrar Pago">
-          <IconButton
-            aria-label="Registrar Pago"
-            onClick={this.props.onPaymentClick}
-          >
+          <IconButton onClick={this.props.onPaymentClick}>
             <FontAwesomeIcon icon={['far', 'coins']} />
           </IconButton>
         </Tooltip>
@@ -119,11 +110,8 @@ class TableToolbar extends React.Component {
   manySelectedActions() {
     return (
       <Fragment>
-        <Tooltip
-          title="Desactivar"
-          onClick={this.props.onDeactivateClick}
-        >
-          <IconButton aria-label="Desactivar">
+        <Tooltip title="Desactivar">
+          <IconButton onClick={this.props.onDeactivateClick}>
             <FontAwesomeIcon icon={['far', 'toggle-off']} />
           </IconButton>
         </Tooltip>

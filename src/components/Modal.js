@@ -42,8 +42,6 @@ class SimpleModal extends React.Component {
       <div>
         <Modal
           className={!this.props.isLoader ? 'large' : ''}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
           open={true}
           onClose={this.props.onClose}
         >
