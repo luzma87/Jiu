@@ -47,7 +47,7 @@ function task_start {
   check_for_tool "node" "nvm install node"
 
   echo "${start_fg}Starting app${normal_fg}"
-  npm start
+  npm run startLocal
 }
 
 function task_clean {

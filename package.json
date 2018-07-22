@@ -4,9 +4,13 @@
   "private": true,
   "description": "Jiu Jitsu front end",
   "main": "index.js",
+  "engines": {
+    "node": ">=4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development --hot --progress --color --port 3030 --open",
+    "start": "webpack-dev-server",
+    "startLocal": "webpack-dev-server --mode development --hot --progress --color --port 3030 --open",
     "build": "webpack -p --progress --colors",
     "check": "nsp check",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\""
