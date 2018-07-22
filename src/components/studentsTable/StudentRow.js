@@ -1,0 +1,65 @@
+import React from 'react';
+import moment from 'moment';
+import { withTheme } from '@material-ui/core/styles';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Checkbox from '@material-ui/core/Checkbox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import constants from '../../util/constants';
+import CustomTableCell from './CustomTableCell';
+
+const formatDate = (date) => {
+  if (date === null) {
+    return '';
+  }
+  return moment(date, 'YYYY-MM-DD').format(constants.dateFormat);
+};
+
+class StudentRow extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { student, isSelected, theme, handleClick } = this.props;
+
+    return (
+      <TableRow
+        hover
+        role="checkbox"
+        key={student.id}
+        aria-checked={isSelected}
+        tabIndex={-1}
+        selected={isSelected}
+        onClick={() => handleClick(student.id)}
+      >
+        <TableCell style={{ padding: 0 }}>
+          <Checkbox checked={isSelected} />
+        </TableCell>
+        <CustomTableCell
+          component="th"
+          scope="row"
+        >
+          {student.firstName} {student.lastName}
+        </CustomTableCell>
+        <CustomTableCell>{formatDate(student.registrationDate)}</CustomTableCell>
+        <CustomTableCell>{formatDate(student.enrollmentDate)}</CustomTableCell>
+        <CustomTableCell>{student.rank.description}</CustomTableCell>
+        <CustomTableCell>{student.methodOfPayment.description}</CustomTableCell>
+        <CustomTableCell>
+          {student.isActive ?
+           <FontAwesomeIcon
+             icon={['far', 'toggle-on']}
+             style={{ color: theme.palette.primary.main }}
+           /> :
+           <FontAwesomeIcon
+             icon={['far', 'toggle-off']}
+             style={{ color: theme.palette.secondary.main }}
+           />}
+        </CustomTableCell>
+      </TableRow>
+    );
+  }
+}
+
+export default withTheme()(StudentRow);

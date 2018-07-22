@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { withTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,20 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import studentClient from '../../rest/StudentClient';
-import constants from '../../util/constants';
-import CustomTableCell from './CustomTableCell';
 import TableHeader from './TableHeader';
 import TableToolbar from './TableToolbar';
-
-const formatDate = (date) => {
-  if (date === null) {
-    return '';
-  }
-  return moment(date, 'YYYY-MM-DD').format(constants.dateFormat);
-};
+import StudentRow from './StudentRow';
 
 class StudentsTable extends React.Component {
   constructor(props) {
@@ -124,7 +113,6 @@ class StudentsTable extends React.Component {
   render() {
     const { students, headers, selected, order, orderBy, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, students.length - page * rowsPerPage);
-    const { theme } = this.props;
 
     return (
       <Paper
@@ -157,42 +145,12 @@ class StudentsTable extends React.Component {
           <TableBody>
             {this.getSlicedSortedList().map(student => {
               const isSelected = this.isSelected(student.id);
-              return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  key={student.id}
-                  aria-checked={isSelected}
-                  tabIndex={-1}
-                  selected={isSelected}
-                  onClick={() => this.handleClick(student.id)}
-                >
-                  <TableCell style={{ padding: 0 }}>
-                    <Checkbox checked={isSelected} />
-                  </TableCell>
-                  <CustomTableCell
-                    component="th"
-                    scope="row"
-                  >
-                    {student.firstName} {student.lastName}
-                  </CustomTableCell>
-                  <CustomTableCell>{formatDate(student.registrationDate)}</CustomTableCell>
-                  <CustomTableCell>{formatDate(student.enrollmentDate)}</CustomTableCell>
-                  <CustomTableCell>{student.rank.description}</CustomTableCell>
-                  <CustomTableCell>{student.methodOfPayment.description}</CustomTableCell>
-                  <CustomTableCell>
-                    {student.isActive ?
-                     <FontAwesomeIcon
-                       icon={['far', 'toggle-on']}
-                       style={{ color: theme.palette.primary.main }}
-                     /> :
-                     <FontAwesomeIcon
-                       icon={['far', 'toggle-off']}
-                       style={{ color: theme.palette.secondary.main }}
-                     />}
-                  </CustomTableCell>
-                </TableRow>
-              );
+              return (<StudentRow
+                key={student.id}
+                student={student}
+                isSelected={isSelected}
+                handleClick={(id) => this.handleClick(id)}
+              />);
             })}
             {emptyRows > 0 && (
               <TableRow style={{ height: 49 * emptyRows }}>
@@ -207,10 +165,10 @@ class StudentsTable extends React.Component {
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'Previous Page',
+            'aria-label': 'Página anterior',
           }}
           nextIconButtonProps={{
-            'aria-label': 'Next Page',
+            'aria-label': 'Página siguiente',
           }}
           onChangePage={(event, page) => this.handleChangePage(event, page)}
           onChangeRowsPerPage={(event) => this.handleChangeRowsPerPage(event)}
