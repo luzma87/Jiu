@@ -10,10 +10,13 @@ import studentClient from '../../rest/StudentClient';
 import TableHeader from './TableHeader';
 import TableToolbar from './TableToolbar';
 import StudentRow from './StudentRow';
+import StudentsFilters from './StudentsFilters';
 
 class StudentsTable extends React.Component {
   constructor(props) {
     super(props);
+    const page = 0;
+    const rowsPerPage = 10;
     this.state = {
       headers: [
         { id: 'firstName', label: 'Nombre', minWidth: 71 },
@@ -24,15 +27,22 @@ class StudentsTable extends React.Component {
         { id: 'isActive', label: 'Activo', width: 40 },
       ],
       students: [],
+      filteredStudents: [],
+      shownStudents: [],
       selected: [],
       order: 'asc',
       orderBy: 'firstName',
-      page: 0,
-      rowsPerPage: 10,
+      page,
+      rowsPerPage,
+      filtersVisible: false,
     };
 
     studentClient.getAllStudents().then((response) => {
-      this.setState({ students: response.data });
+      this.setState({
+        students: response.data,
+        filteredStudents: response.data,
+        shownStudents: this.getSlicedSortedList(response.data, rowsPerPage, page),
+      });
     });
   }
 
@@ -88,11 +98,16 @@ class StudentsTable extends React.Component {
   }
 
   handleChangePage(event, page) {
-    this.setState({ page });
+    const { rowsPerPage, filteredStudents } = this.state;
+    const shownStudents = this.getSlicedSortedList(filteredStudents, rowsPerPage, page);
+    this.setState({ page, shownStudents });
   };
 
   handleChangeRowsPerPage(event) {
-    this.setState({ rowsPerPage: event.target.value });
+    const rowsPerPage = event.target.value;
+    const { page, filteredStudents } = this.state;
+    const shownStudents = this.getSlicedSortedList(filteredStudents, rowsPerPage, page);
+    this.setState({ rowsPerPage, shownStudents });
   };
 
   getSorting() {
@@ -103,15 +118,35 @@ class StudentsTable extends React.Component {
            : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
   }
 
-  getSlicedSortedList() {
-    const { students, rowsPerPage, page } = this.state;
+  getSlicedSortedList(students, rowsPerPage, page) {
     return students
       .sort(this.getSorting())
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   }
 
+  handleFilter(params) {
+    const { filteredStudents, page, rowsPerPage } = this.state;
+    let newFilteredStudents = filteredStudents;
+
+    if (!params.showInactive) {
+      newFilteredStudents = newFilteredStudents.filter((student) => {
+        return student.isActive === true;
+      });
+    }
+    const shownStudents = this.getSlicedSortedList(newFilteredStudents, rowsPerPage, page);
+    this.setState({
+      filtersVisible: false,
+      filteredStudents: newFilteredStudents,
+      shownStudents,
+    });
+  }
+
   render() {
-    const { students, headers, selected, order, orderBy, rowsPerPage, page } = this.state;
+    const {
+      students, filteredStudents, shownStudents,
+      headers, selected, order, orderBy, rowsPerPage,
+      page, filtersVisible,
+    } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, students.length - page * rowsPerPage);
 
     return (
@@ -120,9 +155,17 @@ class StudentsTable extends React.Component {
           width: '100%',
         }}
       >
+
+        <StudentsFilters
+          onClose={() => this.setState({ filtersVisible: false })}
+          onSave={(params) => this.handleFilter(params)}
+          open={filtersVisible}
+        />
+
         <TableToolbar
+          title={`${filteredStudents.length} estudiantes`}
           numSelected={selected.length}
-          onFilterClick={() => {}}
+          onFilterClick={() => this.setState({ filtersVisible: true })}
           onDeactivateClick={() => {
             studentClient.deactivate(selected).then(() => {
               location.reload();
@@ -152,7 +195,7 @@ class StudentsTable extends React.Component {
             rowCount={students.length}
           />
           <TableBody>
-            {this.getSlicedSortedList().map(student => {
+            {shownStudents.map(student => {
               const isSelected = this.isSelected(student.id);
               return (<StudentRow
                 key={student.id}
@@ -170,7 +213,7 @@ class StudentsTable extends React.Component {
         </Table>
         <TablePagination
           component="div"
-          count={students.length}
+          count={filteredStudents.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={(event, page) => this.handleChangePage(event, page)}

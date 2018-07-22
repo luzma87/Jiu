@@ -43,9 +43,9 @@ class TableToolbar extends React.Component {
       return '';
     }
     if (numSelected === 1) {
-      return 'Seleccionado 1 estudiante';
+      return '1 estudiante seleccionado ';
     }
-    return `Seleccionados ${numSelected} estudiantes`;
+    return `${numSelected} estudiantes seleccionados `;
   }
 
   selectedActions() {
@@ -115,7 +115,7 @@ class TableToolbar extends React.Component {
   }
 
   render() {
-    const { numSelected, classes } = this.props;
+    const { numSelected, classes, title } = this.props;
 
     return (
       <Toolbar
@@ -136,7 +136,7 @@ class TableToolbar extends React.Component {
                variant="title"
                id="tableTitle"
              >
-               Estudiantes
+               {title}
              </Typography>
            )}
         </div>
@@ -150,6 +150,7 @@ class TableToolbar extends React.Component {
 }
 
 TableToolbar.propTypes = {
+  title: PropTypes.string.isRequired,
   numSelected: PropTypes.number.isRequired,
   onFilterClick: PropTypes.func.isRequired,
   onDeactivateClick: PropTypes.func.isRequired,
