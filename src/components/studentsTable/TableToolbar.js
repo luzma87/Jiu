@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import studentClient from '../../rest/StudentClient';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,15 +37,6 @@ const styles = theme => ({
 });
 
 class TableToolbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { students: [] };
-
-    studentClient.getAllStudents().then((response) => {
-      this.setState({ students: response.data });
-    });
-  }
-
   selectedString() {
     const { numSelected } = this.props;
     if (numSelected === 0) {

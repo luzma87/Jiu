@@ -6,19 +6,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import studentClient from '../../rest/StudentClient';
 import CustomTableCell from './CustomTableCell';
 
 class TableHeader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { students: [] };
-
-    studentClient.getAllStudents().then((response) => {
-      this.setState({ students: response.data });
-    });
-  }
-
   render() {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount, columnData } = this.props;
 
