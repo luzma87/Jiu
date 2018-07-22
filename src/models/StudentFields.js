@@ -1,20 +1,19 @@
 import constants from '../util/constants';
-import moment from 'moment';
 
-const formatDateForServer = (date) => {
-  if (date === null || date === undefined || date === '') {
-    return null;
-  }
-  let s = moment(date, constants.dateFormat).format(constants.serverDateFormat);
-  console.log(s);
-  return s;
+const setFromServer = (field, serverValue) => {
+  field.value = "" !== serverValue ? serverValue : null;
+};
+
+const dateFromServer = (field, serverValue) => {
+  field.value = "" !== serverValue ? constants.toDate(serverValue) : null;
 };
 
 export default {
   id: {
     value: null,
     error: '',
-    validation: () => {}
+    validation: () => {},
+    setFromServer,
   },
   documentId: {
     value: '',
@@ -28,6 +27,7 @@ export default {
         field.error = 'La cédula debe tener 10 dígitos';
       }
     },
+    setFromServer,
   },
   firstName: {
     value: '',
@@ -37,6 +37,7 @@ export default {
         field.error = 'Es necesario ingresar el nombre';
       }
     },
+    setFromServer,
   },
   lastName: {
     value: '',
@@ -46,6 +47,7 @@ export default {
         field.error = 'Es necesario ingresar el apellido';
       }
     },
+    setFromServer,
   },
   dateOfBirth: {
     value: '',
@@ -56,8 +58,9 @@ export default {
       }
     },
     transform: (field) => {
-      return formatDateForServer(field.value);
+      return constants.formatDateForServer(field.value);
     },
+    setFromServer: dateFromServer,
   },
   gender: {
     value: '',
@@ -67,6 +70,7 @@ export default {
         field.error = 'Es necesario ingresar el género ';
       }
     },
+    setFromServer,
   },
   maritalStatusId: {
     value: '',
@@ -76,6 +80,7 @@ export default {
         field.error = 'Es necesario ingresar el estado civíl';
       }
     },
+    setFromServer,
   },
   height: {
     value: '',
@@ -85,6 +90,7 @@ export default {
         field.error = 'Es necesario ingresar la estatura ';
       }
     },
+    setFromServer,
   },
   weight: {
     value: '',
@@ -94,6 +100,7 @@ export default {
         field.error = 'Es necesario ingresar el peso';
       }
     },
+    setFromServer,
   },
   medicalConditions: {
     value: '',
@@ -103,6 +110,7 @@ export default {
         field.error = 'Es necesario ingresar las condiciones médicas ';
       }
     },
+    setFromServer,
   },
   address: {
     value: '',
@@ -112,6 +120,7 @@ export default {
         field.error = 'Es necesario ingresar la dirección';
       }
     },
+    setFromServer,
   },
   countryOfBirth: {
     value: '',
@@ -121,6 +130,7 @@ export default {
         field.error = 'Es necesario ingresar el paìs de nacimiento';
       }
     },
+    setFromServer,
   },
   cityOfBirth: {
     value: '',
@@ -130,6 +140,7 @@ export default {
         field.error = 'Es necesario ingresar la ciudad de nacimiento';
       }
     },
+    setFromServer,
   },
   email: {
     value: '',
@@ -139,6 +150,7 @@ export default {
         field.error = 'Es necesario ingresar el email';
       }
     },
+    setFromServer,
   },
   phone: {
     value: '',
@@ -148,6 +160,7 @@ export default {
         field.error = 'Es necesario ingresar el teléfono';
       }
     },
+    setFromServer,
   },
   mobilePhone: {
     value: '',
@@ -157,6 +170,7 @@ export default {
         field.error = 'Es necesario ingresar el teléfono mobil';
       }
     },
+    setFromServer,
   },
   giSize: {
     value: '',
@@ -166,11 +180,13 @@ export default {
         field.error = 'Es necesario ingresar el tamaño de Gi ';
       }
     },
+    setFromServer,
   },
   foundOut: {
     value: '',
     error: '',
     validation: (field) => {},
+    setFromServer,
   },
   planId: {
     value: '',
@@ -180,6 +196,7 @@ export default {
         field.error = 'Es necesario ingresar el plan';
       }
     },
+    setFromServer,
   },
   methodOfPaymentId: {
     value: '',
@@ -189,6 +206,7 @@ export default {
         field.error = 'Es necesario ingresar la forma de pago';
       }
     },
+    setFromServer,
   },
   rankId: {
     value: '',
@@ -198,6 +216,7 @@ export default {
         field.error = 'Es necesario ingresar el rango';
       }
     },
+    setFromServer,
   },
   registrationDate: {
     value: '',
@@ -208,16 +227,18 @@ export default {
       }
     },
     transform: (field) => {
-      return formatDateForServer(field.value);
+      return constants.formatDateForServer(field.value);
     },
+    setFromServer: dateFromServer,
   },
   enrollmentDate: {
     value: '',
     error: '',
     validation: (field) => {},
     transform: (field) => {
-      return formatDateForServer(field.value);
+      return constants.formatDateForServer(field.value);
     },
+    setFromServer: dateFromServer,
   },
   emergencyContactName: {
     value: '',
@@ -227,6 +248,7 @@ export default {
         field.error = 'Es necesario ingresar el contacto de emergencia';
       }
     },
+    setFromServer,
   },
   emergencyContactPhone: {
     value: '',
@@ -236,20 +258,24 @@ export default {
         field.error = 'Es necesario ingresar el teléfono';
       }
     },
+    setFromServer,
   },
   legalGuardianName: {
     value: '',
     error: '',
     validation: (field) => {},
+    setFromServer,
   },
   legalGuardianPhone: {
     value: '',
     error: '',
     validation: (field) => {},
+    setFromServer,
   },
   isActive: {
     value: '',
     error: '',
     validation: (field) => {},
+    setFromServer,
   },
 };

@@ -13,7 +13,7 @@ export default class Student {
   setDefaultValues() {
     this.setField("gender", "M");
     this.setField("maritalStatusId", 2);
-    this.setField("registrationDate", moment().format(constants.dateFormat));
+    this.setField("registrationDate", new Date());
     this.setField("isActive", true);
   }
 
@@ -59,7 +59,7 @@ export default class Student {
   fromJson(data) {
     Object.keys(data).map((key) => {
       let field = this.fields[key];
-      field.value = data[key] !== "" ? data[key] : null
+      field.setFromServer(field, data[key]);
     })
   }
 

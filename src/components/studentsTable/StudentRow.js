@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { withTheme } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -7,13 +6,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import constants from '../../util/constants';
 import CustomTableCell from './CustomTableCell';
-
-const formatDate = (date) => {
-  if (date === null) {
-    return '';
-  }
-  return moment(date, constants.serverDateFormat).format(constants.dateFormat);
-};
 
 class StudentRow extends React.Component {
   constructor(props) {
@@ -42,8 +34,8 @@ class StudentRow extends React.Component {
         >
           {student.firstName} {student.lastName}
         </CustomTableCell>
-        <CustomTableCell>{formatDate(student.registrationDate)}</CustomTableCell>
-        <CustomTableCell>{formatDate(student.enrollmentDate)}</CustomTableCell>
+        <CustomTableCell>{constants.formatDate(student.registrationDate)}</CustomTableCell>
+        <CustomTableCell>{constants.formatDate(student.enrollmentDate)}</CustomTableCell>
         <CustomTableCell>{student.rank.description}</CustomTableCell>
         <CustomTableCell>{student.methodOfPayment.description}</CustomTableCell>
         <CustomTableCell>
