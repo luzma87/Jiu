@@ -3,7 +3,8 @@ import MyContext from './MyContext';
 import parametersClient from './../rest/ParametersClient';
 import Modal from './../components/Modal';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import constants from '../util/constants';
 
 class GlobalProvider extends React.Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class GlobalProvider extends React.Component {
       ranks: [],
       plans: [],
       params: [],
-      gender: [{ id: 'M', description: 'Masculino' }, { id: 'F', description: 'Femenino' }],
+      gender: [{ id: "M", description: "Masculino"}, { id: "F", description: "Femenino" }],
+      months: constants.months,
+      years: constants.years,
       modal: {
         show: false,
         isLoader: true,

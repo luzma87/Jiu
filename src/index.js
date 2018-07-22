@@ -16,6 +16,7 @@ import {
   faToggleOff,
   faSave,
   faCalendarAlt,
+  faMoneyBillAlt,
 } from '@fortawesome/pro-regular-svg-icons';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
@@ -23,6 +24,7 @@ import TopBar from './components/TopBar';
 import App from './components/App';
 import StudentForm from './components/StudentForm';
 import StudentList from './components/StudentList';
+import Payments from './components/Payments';
 import GlobalProvider from './context/GlobalProvider';
 import theme from './util/appTheme';
 
@@ -42,6 +44,7 @@ library.add(
   faCaretRight,
   faSave,
   faCalendarAlt,
+  faMoneyBillAlt
 );
 
 ReactDOM.render(
@@ -62,6 +65,10 @@ ReactDOM.render(
           <Route
             path="/students"
             component={StudentList}
+          />
+          <Route
+            path="/payments"
+            component={Payments}
           />
         </GlobalProvider>
       </MuiPickersUtilsProvider>
