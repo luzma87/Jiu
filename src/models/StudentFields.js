@@ -11,6 +11,11 @@ const formatDateForServer = (date) => {
 };
 
 export default {
+  id: {
+    value: null,
+    error: '',
+    validation: () => {}
+  },
   documentId: {
     value: '',
     error: '',

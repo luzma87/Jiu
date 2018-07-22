@@ -13,8 +13,19 @@ class StudentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { student: new Student() };
+    let id = props.match.params.id;
+    if(id !== null && id !== undefined) this.loadStudent(id);
     this.handleChange = this.handleChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+  }
+
+  loadStudent(id) {
+    let student = this.state.student;
+    student.load(id, () => {
+      this.setState({ student })
+    }, (error) => {
+      this.props.context.toggleModal(true, false, 'Error cargando al estudiante', error + '');
+    })
   }
 
   handleAnyChange(fieldId, newValue) {

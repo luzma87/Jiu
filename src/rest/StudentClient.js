@@ -10,9 +10,17 @@ let getAllStudents = () => {
     });
 };
 
+let load = (id) => {
+  return axios.get(bffUrl + `students/${id}`)
+    .catch(function(error) {
+      console.log(error);
+    });
+};
+
 export default {
   save: (userData) => {
-    return axios.post(bffUrl + 'Students', userData, { timeout: 2000 });
+    return axios.put(bffUrl + 'Students', userData, { timeout: 2000 });
   },
   getAllStudents,
+  load,
 };

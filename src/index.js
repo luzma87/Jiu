@@ -56,7 +56,7 @@ ReactDOM.render(
             component={App}
           />
           <Route
-            path="/studentForm"
+            path="/studentForm/:id?"
             component={StudentForm}
           />
           <Route
