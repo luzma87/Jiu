@@ -50,7 +50,7 @@ class GlobalProvider extends React.Component {
           plans: plans.data,
           ranks: ranks.data,
           params: params.data,
-        }, () => console.log(this.state));
+        });
       }))
       .catch((error) => {
         this.updateModalState(true, false, 'Error',
