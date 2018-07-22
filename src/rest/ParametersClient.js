@@ -27,6 +27,12 @@ let getRanks = () => {
       console.log(error);
     });
 };
+let getParams = () => {
+  return axios.get(bffUrl + 'params/1')
+    .catch(function(error) {
+      console.log(error);
+    });
+};
 export default {
   getAll: () => {
     return axios.all([
@@ -34,6 +40,7 @@ export default {
       getPlans(),
       getPaymentMethods(),
       getRanks(),
+      getParams(),
     ]);
   },
 };
