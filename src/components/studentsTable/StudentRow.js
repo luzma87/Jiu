@@ -12,7 +12,7 @@ const formatDate = (date) => {
   if (date === null) {
     return '';
   }
-  return moment(date, 'YYYY-MM-DD').format(constants.dateFormat);
+  return moment(date, constants.serverDateFormat).format(constants.dateFormat);
 };
 
 class StudentRow extends React.Component {
