@@ -69,25 +69,25 @@ class StudentForm extends React.Component {
         <TextField
           id="documentId"
           label="Cédula"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="firstName"
           label="Nombre"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="lastName"
           label="Apellido"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <DatePicker
           id="dateOfBirth"
           label="Fecha de nacimiento"
-          student={student}
+          domainObject={student}
           noMaxDate={false}
           openToYearSelection
           onChange={(id, date) => this.handleAnyChange(id, date)}
@@ -109,70 +109,70 @@ class StudentForm extends React.Component {
         <TextField
           id="height"
           label="Estatura"
-          student={student}
+          domainObject={student}
           adornment="cm"
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="weight"
           label="Peso"
-          student={student}
+          domainObject={student}
           adornment="lb"
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="medicalConditions"
           label="Condiciones médicas"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="address"
           label="Dirección"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="countryOfBirth"
           label="País de nacimiento"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="cityOfBirth"
           label="Ciudad de nacimiento"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="email"
           label="Email"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="phone"
           label="Teléfono fijo"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="mobilePhone"
           label="Celular"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <FormTitle label="Academia" />
         <TextField
           id="giSize"
           label="Tamaño de GI"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="foundOut"
           label="Como nos encontró?"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <div />
@@ -201,7 +201,7 @@ class StudentForm extends React.Component {
           id="registrationDate"
           label="Fecha de registro"
           openToYearSelection={false}
-          student={student}
+          domainObject={student}
           noMaxDate={false}
           onChange={(id, date) => this.handleAnyChange(id, date)}
         />
@@ -209,7 +209,7 @@ class StudentForm extends React.Component {
           id="enrollmentDate"
           label="Fecha de enrolamiento"
           openToYearSelection={false}
-          student={student}
+          domainObject={student}
           noMaxDate
           onChange={(id, date) => this.handleAnyChange(id, date)}
         />
@@ -217,26 +217,26 @@ class StudentForm extends React.Component {
         <TextField
           id="emergencyContactName"
           label="Contacto de emergencia"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="emergencyContactPhone"
           label="Teléfono"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <div />
         <TextField
           id="legalGuardianName"
           label="Representante"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <TextField
           id="legalGuardianPhone"
           label="Teléfono"
-          student={student}
+          domainObject={student}
           onChange={(id, value) => this.handleAnyChange(id, value)}
         />
         <Button
