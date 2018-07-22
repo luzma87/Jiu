@@ -5,7 +5,7 @@ import { withTheme } from '@material-ui/core/styles';
 function App(props) {
   return (
     <div>
-      HOLA
+      HOLA!
     </div>
   );
 }
