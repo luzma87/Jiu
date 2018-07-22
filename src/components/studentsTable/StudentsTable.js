@@ -12,11 +12,41 @@ import TableToolbar from './TableToolbar';
 import StudentRow from './StudentRow';
 import StudentsFilters from './StudentsFilters';
 
+const filterActiveOnly = (students) => {
+  return students.filter((student) => {
+    return student.isActive === true;
+  });
+};
+
+const filterEnrolledOnly = (students) => {
+  return students.filter((student) => {
+    return student.enrollmentDate !== null;
+  });
+};
+
+const getDefaultFilteredStudents = (students) => {
+  return filterActiveOnly(students);
+};
+
+const getSorting = (order, orderBy) => {
+  return order === 'desc'
+         ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+         : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
+};
+
+const getSlicedSortedList = (students, rowsPerPage, page, order, orderBy) => {
+  return students
+    .sort(getSorting(order, orderBy))
+    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+};
+
 class StudentsTable extends React.Component {
   constructor(props) {
     super(props);
     const page = 0;
     const rowsPerPage = 10;
+    const order = 'asc';
+    const orderBy = 'firstName';
     this.state = {
       headers: [
         { id: 'firstName', label: 'Nombre', minWidth: 71 },
@@ -30,18 +60,19 @@ class StudentsTable extends React.Component {
       filteredStudents: [],
       shownStudents: [],
       selected: [],
-      order: 'asc',
-      orderBy: 'firstName',
+      order,
+      orderBy,
       page,
       rowsPerPage,
       filtersVisible: false,
     };
 
     studentClient.getAllStudents().then((response) => {
+      let filteredStudents = getDefaultFilteredStudents(response.data);
       this.setState({
         students: response.data,
-        filteredStudents: response.data,
-        shownStudents: this.getSlicedSortedList(response.data, rowsPerPage, page),
+        filteredStudents: filteredStudents,
+        shownStudents: getSlicedSortedList(filteredStudents, rowsPerPage, page, order, orderBy),
       });
     });
   }
@@ -54,15 +85,21 @@ class StudentsTable extends React.Component {
   }
 
   handleSort(column) {
+    const { page, rowsPerPage, filteredStudents, order, orderBy } = this.state;
     const currentSort = this.state.orderBy;
+    let newOrder = order, newOrderBy = orderBy;
     if (currentSort === column) {
-      this.setState({ order: this.toggleOrder() });
+      newOrder = this.toggleOrder();
     } else {
-      this.setState({
-        order: 'asc',
-        orderBy: column,
-      });
+      newOrder = 'asc';
+      newOrderBy = column;
     }
+    const shownStudents = getSlicedSortedList(filteredStudents, rowsPerPage, page, order, orderBy);
+    this.setState({
+      order: newOrder,
+      orderBy: newOrderBy,
+      shownStudents,
+    });
   }
 
   handleSelectAll(event, checked) {
@@ -98,42 +135,30 @@ class StudentsTable extends React.Component {
   }
 
   handleChangePage(event, page) {
-    const { rowsPerPage, filteredStudents } = this.state;
-    const shownStudents = this.getSlicedSortedList(filteredStudents, rowsPerPage, page);
+    const { rowsPerPage, filteredStudents, order, orderBy } = this.state;
+    const shownStudents = getSlicedSortedList(filteredStudents, rowsPerPage, page, order, orderBy);
     this.setState({ page, shownStudents });
   };
 
   handleChangeRowsPerPage(event) {
     const rowsPerPage = event.target.value;
-    const { page, filteredStudents } = this.state;
-    const shownStudents = this.getSlicedSortedList(filteredStudents, rowsPerPage, page);
+    const { page, filteredStudents, order, orderBy } = this.state;
+    const shownStudents = getSlicedSortedList(filteredStudents, rowsPerPage, page, order, orderBy);
     this.setState({ rowsPerPage, shownStudents });
   };
 
-  getSorting() {
-    const { order, orderBy } = this.state;
-
-    return order === 'desc'
-           ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-           : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
-  }
-
-  getSlicedSortedList(students, rowsPerPage, page) {
-    return students
-      .sort(this.getSorting())
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }
-
   handleFilter(params) {
-    const { filteredStudents, page, rowsPerPage } = this.state;
-    let newFilteredStudents = filteredStudents;
+    const { students, page, rowsPerPage, order, orderBy } = this.state;
+    let newFilteredStudents = students;
 
     if (!params.showInactive) {
-      newFilteredStudents = newFilteredStudents.filter((student) => {
-        return student.isActive === true;
-      });
+      newFilteredStudents = filterActiveOnly(newFilteredStudents);
     }
-    const shownStudents = this.getSlicedSortedList(newFilteredStudents, rowsPerPage, page);
+    if (!params.showNonEnrolled) {
+      newFilteredStudents = filterEnrolledOnly(newFilteredStudents);
+    }
+    const shownStudents = getSlicedSortedList(newFilteredStudents, rowsPerPage, page, order,
+      orderBy);
     this.setState({
       filtersVisible: false,
       filteredStudents: newFilteredStudents,

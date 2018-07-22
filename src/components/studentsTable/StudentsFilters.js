@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import Dialog from '@material-ui/core/Dialog';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -15,7 +14,8 @@ class StudentsFilters extends React.Component {
     super(props);
 
     this.state = {
-      showInactive: true,
+      showInactive: false,
+      showNonEnrolled: true,
     };
   }
 
@@ -25,7 +25,7 @@ class StudentsFilters extends React.Component {
 
   render() {
     const { open, onClose, onSave } = this.props;
-    const { showInactive } = this.state;
+    const { showInactive, showNonEnrolled } = this.state;
 
     return (
       <Dialog
@@ -36,18 +36,32 @@ class StudentsFilters extends React.Component {
           Filtros para la lista de estudiantes
         </DialogTitle>
         <DialogContent>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={showInactive}
-                onChange={(e) => this.handleChange('showInactive', e)}
-                value="showInactive"
-                color="primary"
-              />
-            }
-            label="Mostrar inactivos"
-          />
-
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showInactive}
+                  onChange={(e) => this.handleChange('showInactive', e)}
+                  value="showInactive"
+                  color="primary"
+                />
+              }
+              label="Mostrar inactivos"
+            />
+          </div>
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showNonEnrolled}
+                  onChange={(e) => this.handleChange('showNonEnrolled', e)}
+                  value="showNonEnrolled"
+                  color="primary"
+                />
+              }
+              label="Mostrar no enrolados"
+            />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button
