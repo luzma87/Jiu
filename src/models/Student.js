@@ -1,12 +1,9 @@
 import studentFields from './StudentFields';
 import studentClient from './../rest/StudentClient';
-import moment from 'moment';
-import constants from '../util/constants';
 
 export default class Student {
-
   constructor() {
-    this.fields = studentFields;
+    this.fields = studentFields.new();
     this.setDefaultValues()
   }
 

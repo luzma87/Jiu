@@ -1,14 +1,18 @@
 import constants from '../util/constants';
 
 const setFromServer = (field, serverValue) => {
-  field.value = "" !== serverValue ? serverValue : null;
+  field.value = serverValue === null ? "" : serverValue;
 };
 
 const dateFromServer = (field, serverValue) => {
-  field.value = "" !== serverValue ? constants.toDate(serverValue) : null;
+  if ( serverValue === null || serverValue === "" || serverValue === undefined ) {
+    field.value = "";
+    return;
+  }
+  field.value = constants.toDate(serverValue);
 };
 
-export default {
+let fields = {
   id: {
     value: null,
     error: '',
@@ -279,3 +283,13 @@ export default {
     setFromServer,
   },
 };
+
+export default { new : () => {
+    let copy = JSON.parse(JSON.stringify(fields));
+    Object.keys(copy).map((key) => {
+      copy[key].validation = fields[key].validation;
+      copy[key].setFromServer = fields[key].setFromServer;
+      copy[key].transform = fields[key].transform;
+    });
+    return copy;
+  }};
