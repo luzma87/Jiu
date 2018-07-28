@@ -37,6 +37,17 @@ function TopBar(props) {
             />
             Estudiantes
           </Button>
+          <Button
+            component={Link}
+            to="/payments"
+            color="inherit"
+          >
+            <FontAwesomeIcon
+              icon={['far', 'money-bill-alt']}
+              className="leftIcon"
+            />
+            Pagos
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
