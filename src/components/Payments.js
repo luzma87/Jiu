@@ -13,6 +13,7 @@ class Payments extends React.Component {
     this.state = {
       year: '',
       month: '',
+      payments: [],
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -26,8 +27,11 @@ class Payments extends React.Component {
   }
 
   onGenerateClick() {
-    paymentClient.createForMonth(this.state).then((response) => {
-      console.log(response);
+    this.setState({ payments: [] });
+    const { year, month } = this.state;
+    const params = { year, month };
+    paymentClient.createForMonth(params).then((response) => {
+      this.setState({ payments: response.data.result.result });
     });
   }
 
@@ -65,7 +69,34 @@ class Payments extends React.Component {
           </Button>
         </div>
         <div>
-
+          <table>
+            <thead>
+              <tr>
+                <th>Estudiante</th>
+                <th>Forma de pago</th>
+                <th>Plan</th>
+                <th>Monto debe</th>
+                <th>Monto pagado</th>
+                <th>Fecha pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.payments.map(payment => {
+                return (
+                  <tr>
+                    <td>
+                      {payment.student.firstName} {payment.student.lastName}
+                    </td>
+                    <td>{payment.methodOfPayment.description}</td>
+                    <td>{payment.plan.description}</td>
+                    <td>{payment.amountDue}</td>
+                    <td>{payment.amountPayed}</td>
+                    <td>{payment.date}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
     );
