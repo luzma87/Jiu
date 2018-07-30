@@ -4,31 +4,31 @@ import constants from '../util/constants';
 const bffUrl = constants.bffUrl;
 
 let getMaritalStatus = () => {
-  return axios.get(bffUrl + 'maritalStatus')
+  return axios.get(bffUrl + '/maritalStatus')
     .catch(function(error) {
       console.log(error);
     });
 };
 let getPlans = () => {
-  return axios.get(bffUrl + 'plans')
+  return axios.get(bffUrl + '/plans')
     .catch(function(error) {
       console.log(error);
     });
 };
 let getPaymentMethods = () => {
-  return axios.get(bffUrl + 'methodsOfPayment')
+  return axios.get(bffUrl + '/methodsOfPayment')
     .catch(function(error) {
       console.log(error);
     });
 };
 let getRanks = () => {
-  return axios.get(bffUrl + 'ranks')
+  return axios.get(bffUrl + '/ranks')
     .catch(function(error) {
       console.log(error);
     });
 };
 let getParams = () => {
-  return axios.get(bffUrl + 'params/1')
+  return axios.get(bffUrl + '/params/1')
     .catch(function(error) {
       console.log(error);
     });
