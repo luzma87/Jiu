@@ -1,17 +1,18 @@
 import React from 'react';
-import {withTheme} from "@material-ui/core/styles/index";
-import {withContext} from "../context/WithContext";
+import { withTheme } from '@material-ui/core/styles/index';
+import { withContext } from '../context/WithContext';
 import FormTitle from './fields/FormTitle';
 import Select from './fields/Select';
 import Button from '@material-ui/core/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import paymentClient from '../rest/PaymentClient';
 
 class Payments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      year: "",
-      month: ""
+      year: '',
+      month: '',
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -20,11 +21,15 @@ class Payments extends React.Component {
     const target = event.target;
     const name = target.name;
     this.setState({
-      [name]: target.value
+      [name]: target.value,
     });
   }
 
-  onGenerateClick() {}
+  onGenerateClick() {
+    paymentClient.createForMonth(this.state).then((response) => {
+      console.log(response);
+    });
+  }
 
   render() {
     const { context } = this.props;
@@ -47,7 +52,7 @@ class Payments extends React.Component {
         />
         <div className="smallizer">
           <Button
-            onClick={this.onGenerateClick}
+            onClick={() => this.onGenerateClick()}
             variant="contained"
             color="primary"
           >
@@ -56,11 +61,14 @@ class Payments extends React.Component {
               size="lg"
               style={{ marginRight: 15 }}
             />
-            Generar
+            Generar / Ver
           </Button>
         </div>
+        <div>
+
+        </div>
       </div>
-    )
+    );
   }
 }
 
