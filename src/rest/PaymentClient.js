@@ -11,6 +11,18 @@ const createForMonth = (params) => {
     });
 };
 
+const getAllForMonth = (params) => {
+  const filter = {
+    where: params,
+    include: ['student', 'plan', 'methodOfPayment'],
+  };
+  return axios.get(paymentsUrl + `?filter=${JSON.stringify(filter)}`)
+    .catch(function(error) {
+      console.log(error);
+    });
+};
+
 export default {
   createForMonth,
+  getAllForMonth,
 };

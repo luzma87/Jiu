@@ -6,16 +6,22 @@ import Select from './fields/Select';
 import Button from '@material-ui/core/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import paymentClient from '../rest/PaymentClient';
+import constants from '../util/constants';
 
 class Payments extends React.Component {
   constructor(props) {
     super(props);
+    const currentYear = constants.currentDate.year.toString();
+    const currentMonth = constants.currentDate.month.toString();
     this.state = {
-      year: '',
-      month: '',
+      year: currentYear,
+      month: currentMonth,
       payments: [],
     };
-    this.onChange = this.onChange.bind(this);
+    paymentClient.getAllForMonth({ year: currentYear, month: currentMonth })
+      .then((response) => {
+        this.setState({ payments: response.data });
+      });
   }
 
   onChange(event) {
@@ -45,14 +51,14 @@ class Payments extends React.Component {
           id="year"
           value={this.state.year}
           options={context.years}
-          onChange={this.onChange}
+          onChange={e => this.onChange(e)}
         />
         <Select
           label="Mes"
           id="month"
           value={this.state.month}
           options={context.months}
-          onChange={this.onChange}
+          onChange={e => this.onChange(e)}
         />
         <div className="smallizer">
           <Button
@@ -83,7 +89,7 @@ class Payments extends React.Component {
             <tbody>
               {this.state.payments.map(payment => {
                 return (
-                  <tr>
+                  <tr key={payment.id}>
                     <td>
                       {payment.student.firstName} {payment.student.lastName}
                     </td>
