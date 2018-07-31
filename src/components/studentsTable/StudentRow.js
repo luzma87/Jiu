@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withTheme } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import constants from '../../util/constants';
-import CustomTableCell from './CustomTableCell';
+import CustomTableCell from '../customTable/CustomTableCell';
 
 class StudentRow extends React.Component {
   constructor(props) {
@@ -52,5 +53,11 @@ class StudentRow extends React.Component {
     );
   }
 }
+
+StudentRow.propTypes = {
+  student: PropTypes.object.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default withTheme()(StudentRow);

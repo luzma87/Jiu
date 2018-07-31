@@ -36,7 +36,7 @@ const styles = theme => ({
   },
 });
 
-class TableToolbar extends React.Component {
+class StudentsToolbar extends React.Component {
   selectedString() {
     const { numSelected } = this.props;
     if (numSelected === 0) {
@@ -149,7 +149,7 @@ class TableToolbar extends React.Component {
   }
 }
 
-TableToolbar.propTypes = {
+StudentsToolbar.propTypes = {
   title: PropTypes.string.isRequired,
   numSelected: PropTypes.number.isRequired,
   onFilterClick: PropTypes.func.isRequired,
@@ -161,4 +161,4 @@ TableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TableToolbar);
+export default withStyles(styles)(StudentsToolbar);

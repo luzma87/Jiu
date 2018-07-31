@@ -7,10 +7,10 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import studentClient from '../../rest/StudentClient';
-import TableHeader from './TableHeader';
-import TableToolbar from './TableToolbar';
 import StudentRow from './StudentRow';
 import StudentsFilters from './StudentsFilters';
+import StudentsToolbar from './StudentsToolbar';
+import TableHeader from '../customTable/TableHeader';
 
 const filterActiveOnly = (students) => {
   return students.filter((student) => {
@@ -187,7 +187,7 @@ class StudentsTable extends React.Component {
           open={filtersVisible}
         />
 
-        <TableToolbar
+        <StudentsToolbar
           title={`${filteredStudents.length} estudiantes`}
           numSelected={selected.length}
           onFilterClick={() => this.setState({ filtersVisible: true })}
@@ -248,5 +248,7 @@ class StudentsTable extends React.Component {
     );
   }
 }
+
+StudentsTable.propTypes = {};
 
 export default withTheme()(StudentsTable);

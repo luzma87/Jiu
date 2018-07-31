@@ -17,6 +17,7 @@ import {
   faSave,
   faCalendarAlt,
   faMoneyBillAlt,
+  faPiggyBank,
 } from '@fortawesome/pro-regular-svg-icons';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
@@ -44,7 +45,8 @@ library.add(
   faCaretRight,
   faSave,
   faCalendarAlt,
-  faMoneyBillAlt
+  faMoneyBillAlt,
+  faPiggyBank,
 );
 
 ReactDOM.render(
