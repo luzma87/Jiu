@@ -26,7 +26,7 @@ const months = [
   { id: "1", description: "Enero" },
   { id: "2", description: "Febrero" },
   { id: "3", description: "Marzo" },
-  { id: "4", description: "Abríl" },
+  { id: "4", description: "Abril" },
   { id: "5", description: "Mayo" },
   { id: "6", description: "Junio" },
   { id: "7", description: "Julio" },

@@ -13,8 +13,8 @@ const classes = {
     paddingTop: 40,
   },
   gridList: {
-    width: 400,
-    height: 300,
+    width: 500,
+    height: 410,
   },
 };
 
