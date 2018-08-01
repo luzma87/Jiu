@@ -8,6 +8,28 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import paymentClient from '../rest/PaymentClient';
 import constants from '../util/constants';
+import PaymentsTable from './paymentsTable/PaymentsTable';
+
+const renderNoPayments = () => {
+  return (
+    <Typography
+      variant="title"
+      className="title"
+      color="secondary"
+    >
+      No hay pagos generados para este mes
+      <FontAwesomeIcon
+        icon={['far', 'piggy-bank']}
+        size="2x"
+        style={{ marginLeft: 15 }}
+      />
+    </Typography>
+  );
+};
+
+const renderPaymentsTable = (payments) => {
+  return <PaymentsTable payments={payments} />;
+};
 
 class Payments extends React.Component {
   constructor(props) {
@@ -48,56 +70,6 @@ class Payments extends React.Component {
     });
   }
 
-  renderNoPayments() {
-    return (
-      <Typography
-        variant="title"
-        className="title"
-        color="secondary"
-      >
-        No hay pagos generados para este mes
-        <FontAwesomeIcon
-          icon={['far', 'piggy-bank']}
-          size="2x"
-          style={{ marginLeft: 15 }}
-        />
-      </Typography>
-    );
-  }
-
-  renderPaymentsTable(payments) {
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Estudiante</th>
-            <th>Forma de pago</th>
-            <th>Plan</th>
-            <th>Monto debe</th>
-            <th>Monto pagado</th>
-            <th>Fecha pago</th>
-          </tr>
-        </thead>
-        <tbody>
-          {payments.map(payment => {
-            return (
-              <tr key={payment.id}>
-                <td>
-                  {payment.student.firstName} {payment.student.lastName}
-                </td>
-                <td>{payment.methodOfPayment.description}</td>
-                <td>{payment.plan.description}</td>
-                <td>{payment.amountDue}</td>
-                <td>{payment.amountPayed}</td>
-                <td>{payment.date}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  }
-
   render() {
     const { context } = this.props;
     const { payments } = this.state;
@@ -135,8 +107,7 @@ class Payments extends React.Component {
           </div>
         </div>
         <div className="container">
-          {payments.length === 0 ? this.renderNoPayments() : this.renderPaymentsTable(payments)
-          }
+          {payments.length === 0 ? renderNoPayments() : renderPaymentsTable(payments)}
         </div>
       </div>
     );

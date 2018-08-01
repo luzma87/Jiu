@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -43,9 +42,9 @@ class PaymentsToolbar extends React.Component {
       return '';
     }
     if (numSelected === 1) {
-      return '1 estudiante seleccionado ';
+      return '1 pago seleccionado ';
     }
-    return `${numSelected} estudiantes seleccionados `;
+    return `${numSelected} pagos seleccionados `;
   }
 
   selectedActions() {
@@ -53,10 +52,7 @@ class PaymentsToolbar extends React.Component {
     if (numSelected === 0) {
       return this.noneSelectedActions();
     }
-    if (numSelected === 1) {
-      return this.oneSelectedActions();
-    }
-    return this.manySelectedActions();
+    return this.oneOrMoreSelectedActions();
   }
 
   noneSelectedActions() {
@@ -67,47 +63,16 @@ class PaymentsToolbar extends React.Component {
             <FontAwesomeIcon icon={['far', 'filter']} />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Agregar estudiante">
-          <IconButton
-            component={Link}
-            to="/studentForm"
-          >
-            <FontAwesomeIcon icon={['far', 'user-plus']} />
-          </IconButton>
-        </Tooltip>
       </Fragment>
     );
   }
 
-  oneSelectedActions() {
+  oneOrMoreSelectedActions() {
     return (
       <Fragment>
-        <Tooltip title="Editar">
-          <IconButton onClick={this.props.onEditClick}>
-            <FontAwesomeIcon icon={['far', 'pencil-alt']} />
-          </IconButton>
-        </Tooltip>
         <Tooltip title="Registrar Pago">
           <IconButton onClick={this.props.onPaymentClick}>
             <FontAwesomeIcon icon={['far', 'coins']} />
-          </IconButton>
-        </Tooltip>
-        {this.manySelectedActions()}
-      </Fragment>
-    );
-  }
-
-  manySelectedActions() {
-    return (
-      <Fragment>
-        <Tooltip title="Activar">
-          <IconButton onClick={this.props.onActivateClick}>
-            <FontAwesomeIcon icon={['far', 'toggle-on']} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Desactivar">
-          <IconButton onClick={this.props.onDeactivateClick}>
-            <FontAwesomeIcon icon={['far', 'toggle-off']} />
           </IconButton>
         </Tooltip>
       </Fragment>
@@ -153,10 +118,6 @@ PaymentsToolbar.propTypes = {
   title: PropTypes.string.isRequired,
   numSelected: PropTypes.number.isRequired,
   onFilterClick: PropTypes.func.isRequired,
-  onDeactivateClick: PropTypes.func.isRequired,
-  onActivateClick: PropTypes.func.isRequired,
-  onEditClick: PropTypes.func.isRequired,
-  onAddClick: PropTypes.func.isRequired,
   onPaymentClick: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };

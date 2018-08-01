@@ -9,6 +9,15 @@ const formatDate = (date) => {
   return moment(date, constants.serverDateFormat).format(constants.dateFormat);
 };
 
+const formatMoney = (amount) => {
+  let formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+  return formatter.format(amount);
+};
+
 const formatDateForServer = (date) => {
   if (date === null || date === undefined || date === '') {
     return null;
@@ -54,6 +63,7 @@ const constants = {
   bffUrl,
   dateFormat: 'DD-MM-YYYY',
   serverDateFormat: 'YYYY-MM-DD',
+  formatMoney,
   formatDate,
   formatDateForServer,
   toDate,
