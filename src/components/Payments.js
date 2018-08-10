@@ -120,7 +120,7 @@ class Payments extends React.Component {
           />
           <div className="smallizer">
             <CustomButton
-              label="Generar / Ver"
+              label="Generar"
               icon={['far', 'money-bill-alt']}
               onClick={() => this.onGenerateClick()}
               loading={loading}
