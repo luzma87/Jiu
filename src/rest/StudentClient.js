@@ -20,14 +20,14 @@ const load = (id) => {
 };
 
 const deactivate = (ids) => {
-  return axios.post(bffUrl + studentsUrl + '/deactivate', ids)
+  return axios.post(studentsUrl + '/deactivate', ids)
     .catch(function(error) {
       console.log(error);
     });
 };
 
 const activate = (ids) => {
-  return axios.post(bffUrl + studentsUrl + '/activate', ids)
+  return axios.post(studentsUrl + '/activate', ids)
     .catch(function(error) {
       console.log(error);
     });

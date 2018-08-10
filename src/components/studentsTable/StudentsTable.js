@@ -11,6 +11,7 @@ import StudentRow from './StudentRow';
 import StudentsFilters from './StudentsFilters';
 import StudentsToolbar from './StudentsToolbar';
 import TableHeader from '../customTable/TableHeader';
+import { withContext } from '../../context/WithContext';
 
 const filterActiveOnly = (students) => {
   return students.filter((student) => {
@@ -172,6 +173,7 @@ class StudentsTable extends React.Component {
       headers, selected, order, orderBy, rowsPerPage,
       page, filtersVisible,
     } = this.state;
+    const { context } = this.props;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, students.length - page * rowsPerPage);
 
     return (
@@ -192,11 +194,13 @@ class StudentsTable extends React.Component {
           numSelected={selected.length}
           onFilterClick={() => this.setState({ filtersVisible: true })}
           onDeactivateClick={() => {
+            context.toggleModal(true);
             studentClient.deactivate(selected).then(() => {
               location.reload();
             });
           }}
           onActivateClick={() => {
+            context.toggleModal(true);
             studentClient.activate(selected).then(() => {
               location.reload();
             });
@@ -251,4 +255,4 @@ class StudentsTable extends React.Component {
 
 StudentsTable.propTypes = {};
 
-export default withTheme()(StudentsTable);
+export default withContext(withTheme()(StudentsTable));
