@@ -5,29 +5,31 @@ import TableRow from '@material-ui/core/TableRow';
 import constants from '../../util/constants';
 import CustomTableCell from '../customTable/CustomTableCell';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import IconButton from "@material-ui/core/IconButton/IconButton";
+import IconButton from '@material-ui/core/IconButton/IconButton';
 
 class PaymentRow extends React.Component {
 
-  constructor(props){
-   super(props);
-   this.state = {
-     isEditing: false,
-   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+    };
   }
 
   handleClick() {
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: true });
   }
 
   handleBlur() {
-    this.setState({ isEditing: false })
+    this.setState({ isEditing: false });
   }
 
   render() {
     const { payment, handleChange } = this.props;
-    const value = this.state.isEditing ? payment.amountPayed || "" : constants.formatMoney(payment.amountPayed);
-    const className = payment.amountPayed >= payment.amountDue ? "paid" : "unpaid";
+    const value = this.state.isEditing ?
+                  payment.amountPayed || '' :
+                  constants.formatMoney(payment.amountPayed);
+    const className = payment.amountPayed >= payment.amountDue ? 'paid' : 'unpaid';
     return (
       <TableRow
         hover
@@ -56,8 +58,13 @@ class PaymentRow extends React.Component {
         </CustomTableCell>
         <CustomTableCell>{constants.formatDate(payment.date)}</CustomTableCell>
         <CustomTableCell>
-          <IconButton onClick={() => this.props.saveButtonClick(payment.id)} variant="contained"  color="secondary" size="small">
-            <FontAwesomeIcon  icon={['far', 'save']}  />
+          <IconButton
+            onClick={() => this.props.saveButtonClick(payment.id)}
+            variant="contained"
+            color="secondary"
+            size="small"
+          >
+            <FontAwesomeIcon icon={['far', 'save']} />
           </IconButton>
         </CustomTableCell>
       </TableRow>

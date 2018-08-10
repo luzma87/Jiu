@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import TableHeader from './TableHeader';
 import PaymentRow from './PaymentRow';
 import PaymentsToolbar from './PaymentsToolbar';
-import constants from '../../util/constants'
+import constants from '../../util/constants';
 
 const transformPayment = (payment) => {
   return {
@@ -32,8 +32,8 @@ const getDefaultFilteredPayments = (payments) => {
 
 const getSorting = (order, orderBy) => {
   return order === 'desc'
-    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
+         ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+         : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
 };
 
 const getSlicedSortedList = (payments, rowsPerPage, page, order, orderBy) => {
@@ -54,7 +54,7 @@ class PaymentsTable extends React.Component {
     this.state = {
       headers: [
         { id: 'student', label: 'Estudiante' },
-        { id: 'methodOfPayment', label: 'Forma de pago'},
+        { id: 'methodOfPayment', label: 'Forma de pago' },
         { id: 'plan', label: 'Plan' },
         { id: 'amountDue', label: 'Monto debe' },
         { id: 'amountPayed', label: 'Monto pagado' },
@@ -143,7 +143,7 @@ class PaymentsTable extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, payments.length - page * rowsPerPage);
     const totalPaid = payments.reduce((accumulator, payment) => {
       const value = payment.amountPayed || 0;
-      return  accumulator*1 + value*1
+      return accumulator * 1 + value * 1;
     }, 0);
 
     return (

@@ -28,7 +28,7 @@ class TableHeader extends React.Component {
                   active={orderBy === column.id}
                   direction={order}
                   onClick={() => this.props.onRequestSort(column.id)}
-                  style={{ width: column.width, minWidth: column.minWidth}}
+                  style={{ width: column.width, minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableSortLabel>
