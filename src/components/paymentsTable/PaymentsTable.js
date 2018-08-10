@@ -7,14 +7,26 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-import paymentClient from '../../rest/PaymentClient';
-import PaymentsFilters from './PaymentsFilters';
 import TableHeader from '../customTable/TableHeader';
 import PaymentRow from './PaymentRow';
 import PaymentsToolbar from './PaymentsToolbar';
 
+const transformPayment = (payment) => {
+  return {
+    id: payment.id,
+    amountDue: payment.amountDue,
+    amountPayed: payment.amountPayed,
+    date: payment.date,
+    month: payment.month,
+    year: payment.year,
+    student: `${payment.student.firstName} ${payment.student.lastName}`,
+    methodOfPayment: payment.methodOfPayment.description,
+    plan: payment.plan.description,
+  };
+};
+
 const getDefaultFilteredPayments = (payments) => {
-  return payments;
+  return payments.map(payment => transformPayment(payment));
 };
 
 const getSorting = (order, orderBy) => {
@@ -24,6 +36,7 @@ const getSorting = (order, orderBy) => {
 };
 
 const getSlicedSortedList = (payments, rowsPerPage, page, order, orderBy) => {
+  console.log(payments);
   return payments
     .sort(getSorting(order, orderBy))
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
@@ -35,12 +48,12 @@ class PaymentsTable extends React.Component {
     const page = 0;
     const rowsPerPage = 10;
     const order = 'asc';
-    const orderBy = 'firstName';
+    const orderBy = 'student';
     const { payments } = props;
     let filteredPayments = getDefaultFilteredPayments(payments);
     this.state = {
       headers: [
-        { id: 'firstName', label: 'Estudiante', minWidth: 71 },
+        { id: 'student', label: 'Estudiante', minWidth: 71 },
         { id: 'methodOfPayment', label: 'Forma de pago', width: 71 },
         { id: 'plan', label: 'Plan', width: 71 },
         { id: 'amountDue', label: 'Monto debe', width: 40 },
@@ -59,18 +72,14 @@ class PaymentsTable extends React.Component {
     };
   }
 
-  updatePayments(payments) {
+  componentWillReceiveProps(nextProps) {
     const { page, rowsPerPage, order, orderBy } = this.state;
-    let filteredPayments = getDefaultFilteredPayments(payments);
+    let filteredPayments = getDefaultFilteredPayments(nextProps.payments);
     this.setState({
-      payments: payments,
+      payments: nextProps.payments,
       filteredPayments: filteredPayments,
       shownPayments: getSlicedSortedList(filteredPayments, rowsPerPage, page, order, orderBy),
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updatePayments(nextProps.payments);
   }
 
   toggleOrder() {

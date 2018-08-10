@@ -14,7 +14,6 @@ class PaymentRow extends React.Component {
 
   render() {
     const { payment, isSelected, theme, handleClick } = this.props;
-    console.log(payment);
     return (
       <TableRow
         hover
@@ -31,10 +30,10 @@ class PaymentRow extends React.Component {
           component="th"
           scope="row"
         >
-          {payment.student.firstName} {payment.student.lastName}
+          {payment.student}
         </CustomTableCell>
-        <CustomTableCell>{payment.methodOfPayment.description}</CustomTableCell>
-        <CustomTableCell>{payment.plan.description}</CustomTableCell>
+        <CustomTableCell>{payment.methodOfPayment}</CustomTableCell>
+        <CustomTableCell>{payment.plan}</CustomTableCell>
         <CustomTableCell>{constants.formatMoney(payment.amountDue)}</CustomTableCell>
         <CustomTableCell>{constants.formatMoney(payment.amountPayed)}</CustomTableCell>
         <CustomTableCell>{constants.formatDate(payment.date)}</CustomTableCell>

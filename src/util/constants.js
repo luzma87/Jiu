@@ -1,6 +1,6 @@
 import moment from 'moment/moment';
 
-const bffUrl = 'https://jitsube.herokuapp.com/api';
+const bffUrl = 'http://localhost:3000/api';
 
 const formatDate = (date) => {
   if (date === null) {
