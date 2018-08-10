@@ -27,10 +27,6 @@ const renderNoPayments = () => {
   );
 };
 
-const renderPaymentsTable = (payments) => {
-  return <PaymentsTable payments={payments} />;
-};
-
 class Payments extends React.Component {
   constructor(props) {
     super(props);
@@ -65,6 +61,13 @@ class Payments extends React.Component {
     });
   }
 
+  handleChange(id, value) {
+    let payments = this.state.payments;
+    let payment = payments.find(payment => payment.id === id);
+    payment.amountPayed = value;
+    this.setState({ payments })
+  }
+
   onGenerateClick() {
     this.setState({ payments: [], loading: true });
     const { year, month } = this.state;
@@ -72,6 +75,11 @@ class Payments extends React.Component {
       this.setState({ payments: response.data.result.result, loading: false });
     });
   }
+
+
+  renderPaymentsTable(payments){
+    return <PaymentsTable payments={payments} handleChange={(index, value) => this.handleChange (index, value)} />;
+  };
 
   render() {
     const { context } = this.props;
@@ -103,8 +111,8 @@ class Payments extends React.Component {
             />
           </div>
         </div>
-        <div className="container">
-          {payments.length === 0 ? renderNoPayments() : renderPaymentsTable(payments)}
+        <div className="container payments-table">
+          {payments.length === 0 ? renderNoPayments() : this.renderPaymentsTable(payments)}
         </div>
       </div>
     );

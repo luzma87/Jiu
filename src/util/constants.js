@@ -2,7 +2,7 @@ import moment from 'moment/moment';
 import React from 'react';
 import gif from '../assets/loader.svg';
 
-const bffUrl = 'http://localhost:3000/api';
+const bffUrl = 'http://192.168.100.4:3000/api';
 
 const formatDate = (date) => {
   if (date === null) {

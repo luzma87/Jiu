@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-import TableHeader from '../customTable/TableHeader';
+import TableHeader from './TableHeader';
 import PaymentRow from './PaymentRow';
 import PaymentsToolbar from './PaymentsToolbar';
 
@@ -52,17 +52,17 @@ class PaymentsTable extends React.Component {
     let filteredPayments = getDefaultFilteredPayments(payments);
     this.state = {
       headers: [
-        { id: 'student', label: 'Estudiante', minWidth: 71 },
-        { id: 'methodOfPayment', label: 'Forma de pago', width: 71 },
-        { id: 'plan', label: 'Plan', width: 71 },
-        { id: 'amountDue', label: 'Monto debe', width: 40 },
-        { id: 'amountPayed', label: 'Monto pagado', width: 89 },
-        { id: 'date', label: 'Fecha Pago', width: 40 },
+        { id: 'student', label: 'Estudiante' },
+        { id: 'methodOfPayment', label: 'Forma de pago'},
+        { id: 'plan', label: 'Plan' },
+        { id: 'amountDue', label: 'Monto debe' },
+        { id: 'amountPayed', label: 'Monto pagado' },
+        { id: 'date', label: 'Fecha de pago' },
+        { id: 'button', label: 'Pagar' },
       ],
       payments: payments,
       filteredPayments,
       shownPayments: getSlicedSortedList(filteredPayments, rowsPerPage, page, order, orderBy),
-      selected: [],
       order,
       orderBy,
       page,
@@ -106,38 +106,6 @@ class PaymentsTable extends React.Component {
     });
   }
 
-  handleSelectAll(event, checked) {
-    if (checked) {
-      this.setState(state => ({ selected: state.payments.map(n => n.id) }));
-      return;
-    }
-    this.setState({ selected: [] });
-  }
-
-  isSelected(id) {
-    return this.state.selected.indexOf(id) !== -1;
-  }
-
-  handleClick(id) {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-    this.setState({ selected: newSelected });
-  }
-
   handleChangePage(event, page) {
     const { rowsPerPage, filteredPayments, order, orderBy } = this.state;
     const shownPayments = getSlicedSortedList(filteredPayments, rowsPerPage, page, order, orderBy);
@@ -165,9 +133,10 @@ class PaymentsTable extends React.Component {
   }
 
   render() {
+
     const {
       payments, filteredPayments, shownPayments,
-      headers, selected, order, orderBy, rowsPerPage,
+      headers, order, orderBy, rowsPerPage,
       page, filtersVisible,
     } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, payments.length - page * rowsPerPage);
@@ -187,28 +156,27 @@ class PaymentsTable extends React.Component {
 
         <PaymentsToolbar
           title={`${filteredPayments.length} pagos`}
-          numSelected={selected.length}
+          numSelected={0}
           onFilterClick={() => this.setState({ filtersVisible: true })}
           onPaymentClick={() => {}}
         />
         <Table style={{ width: '100%' }}>
           <TableHeader
             columnData={headers}
-            numSelected={selected.length}
+            numSelected={0}
             onRequestSort={column => this.handleSort(column)}
-            onSelectAllClick={(event, checked) => this.handleSelectAll(event, checked)}
+            onSelectAllClick={() => {}}
             order={order}
             orderBy={orderBy}
             rowCount={payments.length}
           />
           <TableBody>
-            {shownPayments.map(payment => {
-              const isSelected = this.isSelected(payment.id);
+            {shownPayments.map((payment, index) => {
               return (<PaymentRow
                 key={payment.id}
+                position={index}
                 payment={payment}
-                isSelected={isSelected}
-                handleClick={(id) => this.handleClick(id)}
+                handleChange={this.props.handleChange}
               />);
             })}
             {emptyRows > 0 && (
@@ -233,6 +201,7 @@ class PaymentsTable extends React.Component {
 
 PaymentsTable.propTypes = {
   payments: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired
 };
 
 export default withTheme()(PaymentsTable);
