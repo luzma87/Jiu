@@ -6,11 +6,6 @@ import Button from '@material-ui/core/Button/Button';
 import constants from '../util/constants';
 
 class SimpleModal extends React.Component {
-
-  constructor() {
-    super();
-  }
-
   showText() {
     return (
       <Fragment>

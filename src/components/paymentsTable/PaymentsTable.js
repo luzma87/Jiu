@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import TableHeader from './TableHeader';
 import PaymentRow from './PaymentRow';
 import PaymentsToolbar from './PaymentsToolbar';
+import constants from '../../util/constants'
 
 const transformPayment = (payment) => {
   return {
@@ -31,8 +32,8 @@ const getDefaultFilteredPayments = (payments) => {
 
 const getSorting = (order, orderBy) => {
   return order === 'desc'
-         ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-         : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
+    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
 };
 
 const getSlicedSortedList = (payments, rowsPerPage, page, order, orderBy) => {
@@ -140,6 +141,10 @@ class PaymentsTable extends React.Component {
       page, filtersVisible,
     } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, payments.length - page * rowsPerPage);
+    const totalPaid = payments.reduce((accumulator, payment) => {
+      const value = payment.amountPayed || 0;
+      return  accumulator*1 + value*1
+    }, 0);
 
     return (
       <Paper
@@ -155,7 +160,7 @@ class PaymentsTable extends React.Component {
         {/*/>*/}
 
         <PaymentsToolbar
-          title={`${filteredPayments.length} pagos`}
+          title={`${filteredPayments.length} pagos - ${constants.formatMoney(totalPaid)} pagado`}
           numSelected={0}
           onFilterClick={() => this.setState({ filtersVisible: true })}
           onPaymentClick={() => {}}
@@ -177,6 +182,7 @@ class PaymentsTable extends React.Component {
                 position={index}
                 payment={payment}
                 handleChange={this.props.handleChange}
+                saveButtonClick={this.props.saveButtonClick}
               />);
             })}
             {emptyRows > 0 && (
@@ -201,7 +207,8 @@ class PaymentsTable extends React.Component {
 
 PaymentsTable.propTypes = {
   payments: PropTypes.array.isRequired,
-  handleChange: PropTypes.func.isRequired
+  handleChange: PropTypes.func.isRequired,
+  saveButtonClick: PropTypes.func.isRequired,
 };
 
 export default withTheme()(PaymentsTable);

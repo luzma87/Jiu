@@ -1,7 +1,7 @@
 import * as React from 'react';
 import MyContext from './MyContext';
 import parametersClient from './../rest/ParametersClient';
-import Modal from './../components/Modal';
+import Modal from '../components/SimpleModal';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import constants from '../util/constants';

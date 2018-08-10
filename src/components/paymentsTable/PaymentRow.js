@@ -8,8 +8,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 
 class PaymentRow extends React.Component {
+
+  constructor(props){
+   super(props);
+   this.state = {
+     isEditing: false,
+   }
+  }
+
+  handleClick() {
+    this.setState({ isEditing: true })
+  }
+
+  handleBlur() {
+    this.setState({ isEditing: false })
+  }
+
   render() {
     const { payment, handleChange } = this.props;
+    const value = this.state.isEditing ? payment.amountPayed || "" : constants.formatMoney(payment.amountPayed);
     return (
       <TableRow
         hover
@@ -27,11 +44,17 @@ class PaymentRow extends React.Component {
         <CustomTableCell>{payment.plan}</CustomTableCell>
         <CustomTableCell numeric>{constants.formatMoney(payment.amountDue)}</CustomTableCell>
         <CustomTableCell>
-          <input type="text" value={payment.amountPayed || ''} onChange={(event) => handleChange(payment.id, event.target.value)}/>
+          <input
+            type="text"
+            value={value}
+            onChange={(event) => handleChange(payment.id, event.target.value)}
+            onClick={this.handleClick.bind(this)}
+            onBlur={this.handleBlur.bind(this)}
+          />
         </CustomTableCell>
         <CustomTableCell>{constants.formatDate(payment.date)}</CustomTableCell>
         <CustomTableCell>
-          <IconButton onClick={() => this.onGenerateClick()} variant="contained"  color="secondary" size="small">
+          <IconButton onClick={() => this.props.saveButtonClick(payment.id)} variant="contained"  color="secondary" size="small">
             <FontAwesomeIcon  icon={['far', 'money-bill-alt']}  />
           </IconButton>
         </CustomTableCell>
@@ -43,6 +66,7 @@ class PaymentRow extends React.Component {
 PaymentRow.propTypes = {
   payment: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
+  saveButtonClick: PropTypes.func.isRequired,
 };
 
 export default withTheme()(PaymentRow);

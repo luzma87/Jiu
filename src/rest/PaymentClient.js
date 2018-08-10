@@ -22,7 +22,14 @@ const getAllForMonth = (params) => {
     });
 };
 
+const save = (payment, success, error) => {
+  return axios.put(paymentsUrl, payment, { timeout: 2000 })
+    .then(()=> success())
+    .catch(serverError => error(serverError));
+};
+
 export default {
   createForMonth,
   getAllForMonth,
+  save
 };

@@ -68,6 +68,22 @@ class Payments extends React.Component {
     this.setState({ payments })
   }
 
+  saveButtonClick(id) {
+    let payments = this.state.payments;
+    let payment = payments.find(payment => payment.id === id);
+    const { context } = this.props;
+    if(payment.amountPayed !== "" && payment.amountPayed !== null && payment.amountPayed !== undefined) {
+      context.toggleModal(true);
+      payment.date = constants.formatDateForServer(new Date());
+      paymentClient.save(payment, () => {
+        context.toggleModal(false);
+        this.setState({ payments })
+      }, error => {
+        context.toggleModal(true, false, 'Error guardando el pago '+error);
+      });
+    }
+  }
+
   onGenerateClick() {
     this.setState({ payments: [], loading: true });
     const { year, month } = this.state;
@@ -78,7 +94,7 @@ class Payments extends React.Component {
 
 
   renderPaymentsTable(payments){
-    return <PaymentsTable payments={payments} handleChange={(index, value) => this.handleChange (index, value)} />;
+    return <PaymentsTable payments={payments} handleChange={(index, value) => this.handleChange (index, value)} saveButtonClick={id => this.saveButtonClick(id)} />;
   };
 
   render() {

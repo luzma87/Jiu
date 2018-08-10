@@ -24,9 +24,7 @@ const formatDateForServer = (date) => {
   if (date === null || date === undefined || date === '') {
     return null;
   }
-  let s = moment(date, constants.dateFormat).format(constants.serverDateFormat);
-  console.log(s);
-  return s;
+  return moment(date, constants.dateFormat).format(constants.serverDateFormat);
 };
 
 const toDate = (dateString) => {
