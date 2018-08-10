@@ -1,4 +1,6 @@
 import moment from 'moment/moment';
+import React from 'react';
+import gif from '../assets/loader.svg';
 
 const bffUrl = 'http://localhost:3000/api';
 
@@ -59,6 +61,14 @@ const currentDate = {
   month: now.month(),
 };
 
+const loadingGif = (width = '100%', height = '100%') => (
+  <img
+    src={gif}
+    width={width}
+    height={height}
+  />
+);
+
 const constants = {
   bffUrl,
   dateFormat: 'DD-MM-YYYY',
@@ -70,6 +80,7 @@ const constants = {
   months,
   years,
   currentDate,
+  loadingGif,
 };
 
 export default constants;

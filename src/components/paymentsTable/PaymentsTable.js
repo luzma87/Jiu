@@ -36,7 +36,6 @@ const getSorting = (order, orderBy) => {
 };
 
 const getSlicedSortedList = (payments, rowsPerPage, page, order, orderBy) => {
-  console.log(payments);
   return payments
     .sort(getSorting(order, orderBy))
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);

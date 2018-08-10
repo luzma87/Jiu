@@ -3,12 +3,12 @@ import { withTheme } from '@material-ui/core/styles/index';
 import { withContext } from '../context/WithContext';
 import FormTitle from './fields/FormTitle';
 import Select from './fields/Select';
-import Button from '@material-ui/core/Button/Button';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import paymentClient from '../rest/PaymentClient';
 import constants from '../util/constants';
 import PaymentsTable from './paymentsTable/PaymentsTable';
+import CustomButton from './CustomButton';
 
 const renderNoPayments = () => {
   return (
@@ -40,10 +40,15 @@ class Payments extends React.Component {
       year: currentYear,
       month: currentMonth,
       payments: [],
+      loading: true,
     };
-    paymentClient.getAllForMonth({ year: currentYear, month: currentMonth })
+    this.getPayments(currentMonth, currentYear);
+  }
+
+  getPayments(month, year) {
+    paymentClient.getAllForMonth({ year, month })
       .then((response) => {
-        this.setState({ payments: response.data });
+        this.setState({ payments: response.data, loading: false });
       });
   }
 
@@ -53,26 +58,24 @@ class Payments extends React.Component {
     this.setState({
       payments: [],
       [name]: target.value,
+      loading: true,
     }, () => {
       const { year, month } = this.state;
-      paymentClient.getAllForMonth({ year, month })
-        .then((response) => {
-          this.setState({ payments: response.data });
-        });
+      this.getPayments(month, year);
     });
   }
 
   onGenerateClick() {
-    this.setState({ payments: [] });
+    this.setState({ payments: [], loading: true });
     const { year, month } = this.state;
     paymentClient.createForMonth({ year, month }).then((response) => {
-      this.setState({ payments: response.data.result.result });
+      this.setState({ payments: response.data.result.result, loading: false });
     });
   }
 
   render() {
     const { context } = this.props;
-    const { payments } = this.state;
+    const { payments, loading } = this.state;
     return (
       <div>
         <div className="container gridContainer">
@@ -92,18 +95,12 @@ class Payments extends React.Component {
             onChange={e => this.onChange(e)}
           />
           <div className="smallizer">
-            <Button
+            <CustomButton
+              label="Generar / Ver"
+              icon={['far', 'money-bill-alt']}
               onClick={() => this.onGenerateClick()}
-              variant="contained"
-              color="primary"
-            >
-              <FontAwesomeIcon
-                icon={['far', 'money-bill-alt']}
-                size="lg"
-                style={{ marginRight: 15 }}
-              />
-              Generar / Ver
-            </Button>
+              loading={loading}
+            />
           </div>
         </div>
         <div className="container">

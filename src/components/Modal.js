@@ -1,40 +1,47 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button/Button';
-import gif from './../assets/loader.svg'
+import constants from '../util/constants';
 
 class SimpleModal extends React.Component {
 
-  constructor(){
+  constructor() {
     super();
   }
 
-  showGif() {
-    return <img src={gif} width="100%" height="100%"/>;
-  }
-
   showText() {
-    return(
+    return (
       <Fragment>
         <div className="title">
-          <Typography variant="title" id="modal-title" color="primary">
+          <Typography
+            variant="title"
+            id="modal-title"
+            color="primary"
+          >
             {this.props.title}
           </Typography>
         </div>
         <div className="body">
-          <Typography variant="subheading" id="simple-modal-description" className="modal-message">
+          <Typography
+            variant="subheading"
+            id="simple-modal-description"
+            className="modal-message"
+          >
             {this.props.message}
           </Typography>
         </div>
         <div className="buttons">
-          <Button onClick={this.props.onClick} variant="outlined" >
+          <Button
+            onClick={this.props.onClick}
+            variant="outlined"
+          >
             Cerrar
           </Button>
         </div>
       </Fragment>
-    )
+    );
   }
 
   render() {
@@ -46,7 +53,7 @@ class SimpleModal extends React.Component {
           onClose={this.props.onClose}
         >
           <div className="modal">
-            { this.props.isLoader ? this.showGif() : this.showText() }
+            {this.props.isLoader ? constants.loadingGif() : this.showText()}
           </div>
         </Modal>
       </div>
