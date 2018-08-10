@@ -59,7 +59,7 @@ class PaymentsTable extends React.Component {
         { id: 'amountDue', label: 'Monto debe' },
         { id: 'amountPayed', label: 'Monto pagado' },
         { id: 'date', label: 'Fecha de pago' },
-        { id: 'button', label: 'Pagar' },
+        { id: 'button', label: 'Guardar' },
       ],
       payments: payments,
       filteredPayments,

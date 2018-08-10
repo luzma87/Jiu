@@ -27,12 +27,14 @@ class PaymentRow extends React.Component {
   render() {
     const { payment, handleChange } = this.props;
     const value = this.state.isEditing ? payment.amountPayed || "" : constants.formatMoney(payment.amountPayed);
+    const className = payment.amountPayed >= payment.amountDue ? "paid" : "unpaid";
     return (
       <TableRow
         hover
         role="checkbox"
         key={payment.id}
         tabIndex={-1}
+        className={className}
       >
         <CustomTableCell
           component="th"
@@ -55,7 +57,7 @@ class PaymentRow extends React.Component {
         <CustomTableCell>{constants.formatDate(payment.date)}</CustomTableCell>
         <CustomTableCell>
           <IconButton onClick={() => this.props.saveButtonClick(payment.id)} variant="contained"  color="secondary" size="small">
-            <FontAwesomeIcon  icon={['far', 'money-bill-alt']}  />
+            <FontAwesomeIcon  icon={['far', 'save']}  />
           </IconButton>
         </CustomTableCell>
       </TableRow>

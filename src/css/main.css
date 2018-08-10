@@ -70,10 +70,20 @@ body {
   font-size: 13px;
   padding: 0 10px 0 10px ;
 }
+
+.payments-table table .unpaid input {
+  background: #fbe9e7;
+  border: 1px solid #ff7043;
+}
+
+.payments-table table .paid input {
+  background: #e0f2f1;
+  border: 1px solid #26a69a;
+}
+
 .payments-table input {
   text-align: right;
   background: none;
-  border: 1px solid #8C6E64;
   padding: 5px;
   border-radius: 4px;
 }
